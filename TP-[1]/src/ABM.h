@@ -11,6 +11,8 @@
 ///
 void menuMain();
 
+/* punto 1 */
+
 /// @brief pide que ingresen los costos de mantenimiento, y los devuelve validados.
 ///
 /// @param pHospedaje direccion de memoria de la variable que va a hacer ingresada por el usuario.
@@ -25,9 +27,37 @@ int costsoDeMantenimiento(float* pHospedaje, float* pComida, float* pTransporte)
 /// @param valor  ingresado por el usuario
 /// @param min rango minimo del valor que se desea devolver
 /// @param max rango maximo del valor que se desea devolver
-/// @return
+/// @return 1 si esta bien  y -1 si no
 int setter_Hospedaje (float* pPrecio, float valor, float min, float max );
 
+/// @param pPrecio valor de la direccion de memoria que va a hacer rescrita
+/// @param valor  ingresado por el usuario
+/// @param min rango minimo del valor que se desea devolver
+/// @param max rango maximo del valor que se desea devolver
+/// @return 1 si esta bien  y -1 si no
 int setter_Comida (float* pPrecio, float valor, float min, float max );
 
+/// @param pPrecio valor de la direccion de memoria que va a hacer rescrita
+/// @param valor  ingresado por el usuario
+/// @param min rango minimo del valor que se desea devolver
+/// @param max rango maximo del valor que se desea devolver
+/// @return 1 si esta bien  y -1 si no
 int setter_Transporte (float* pPrecio, float valor, float min, float max );
+
+/* punto 2 */
+/* nuevo proceso*/
+
+int cargaDeCamisetas(int* pCamisas);
+int setter_Camiseta(int* pCamiseta, int valor, int min, int max );
+
+int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDeMed, int* pPosicionDeDel );
+
+int cargaDeConfederacion(int* pConfederaciones);
+int setter_Confederacion(int* pConfederacion, int valor, int min, int max );
+
+
+
+
+
+
+
