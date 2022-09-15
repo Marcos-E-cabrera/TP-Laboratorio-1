@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "ABM.h"
-
+#define  LEN 3
 void menuMain()
 {
 	setbuf(stdout,NULL);
@@ -53,7 +53,9 @@ void menuMain()
 	defensores = 0;
 	mediocampistas = 0;
 	delanteros = 0;
-	cantidadJugadores = 1;
+	cantidadJugadores = 0;
+
+	char seguir = 's';
 
 	do
 	{
@@ -103,21 +105,42 @@ void menuMain()
 				break;
 			case 2:
 				system("cls");
-				while ( cantidadJugadores <= 22 )
+				while ( cantidadJugadores <= LEN && seguir == 's')
 				{
-					system("cls");
-					cargaDeCamisetas(&camiseta);
-					if (cargaDePosiciones(&arqueros, &defensores, &mediocampistas, &delanteros) == 1)
+					while (seguir != 'n')
 					{
-						contadorArqueros = arqueros;
-						contadorDefensores = defensores;
-						contadorMediocampistas = mediocampistas;
-						contadorDelanteros = delanteros;
-						cantidadJugadores++;
-						cargaDeConfederacion(&confederacion);
+						system("cls");
+						cargaDeCamisetas(&camiseta);
+						if (cargaDePosiciones(&arqueros, &defensores, &mediocampistas, &delanteros) == 1)
+						{
+							contadorArqueros = arqueros;
+							contadorDefensores = defensores;
+							contadorMediocampistas = mediocampistas;
+							contadorDelanteros = delanteros;
+							cantidadJugadores++;
+							cargaDeConfederacion(&confederacion);
+						}
+
+						if (cantidadJugadores < LEN)
+						{
+							printf(" > Deseas seguir ingresando jugadores (s/n) :   ");
+							fflush(stdin);
+							scanf("%c", &seguir);
+						}
+						else{
+							seguir = 'n';
+						}
 					}
 				}
-				printf("\n > Cantidad de jugadores llena!!!\n");
+				if (cantidadJugadores == LEN)
+				{
+					printf("\n > Cantidad de jugadores llena!!!\n");
+				}
+				else
+				{
+					printf(" > Salida de Carga de jugadores Exitosa!!!\n");
+					seguir = 's';
+				}
 				break;
 			case 3:
 				printf("Chau\n");
