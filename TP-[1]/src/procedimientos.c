@@ -6,16 +6,37 @@
 #include "utn.h"
 
 /* 1 ) Ingreso de los costos de Mantenimiento */
-int costsoDeMantenimiento(float* pHospedaje, float* pComida, float* pTransporte)
+int costoHospedaje (float* pHospedaje)
 {
 	int retorno = -1;
 
-	if (pHospedaje != NULL && pComida != NULL && pTransporte != NULL )
+	if (pHospedaje != NULL )
 	{
-		utn_getFloat(pHospedaje, " > Ingrese Costo de Hospedaje:  ", " > Error, Reingrese Costo de Hospedaje\n", 0.00, 100000.00, 10);
-		utn_getFloat(pComida, " > Ingrese Costo de Comida:  ", " > Error, Reingrese Costo de Comida\n", 0.00, 100000.00, 10);
-		utn_getFloat(pTransporte, " > Ingrese Costo de Trasporte:  ", " > Error, Reingrese Costo de Trasporte\n", 0.00, 100000.00, 10);
-		retorno = 1;
+		retorno = utn_getFloat(pHospedaje, " -| Ingrese Costo de Hospedaje:  ", " -| Error, Reingrese Costo de Hospedaje\n", 1.00, 100000000.00, 5);
+	}
+
+	return retorno;
+}
+
+int costoComida (float* pComida)
+{
+	int retorno = -1;
+
+	if (pComida != NULL )
+	{
+		retorno = utn_getFloat(pComida, " -| Ingrese Costo de Comida:  ", " -| Error, Reingrese Costo de Comida\n", 1.00, 100000000.00, 5);
+	}
+
+	return retorno;
+}
+
+int costoTransporte (float* pTransporte)
+{
+	int retorno = -1;
+
+	if (pTransporte != NULL )
+	{
+		retorno = utn_getFloat(pTransporte, " -| Ingrese Costo de Trasporte:  ", " -| Error, Reingrese Costo de Trasporte\n", 1.00, 100000000.00, 5);
 	}
 
 	return retorno;
@@ -29,7 +50,9 @@ int cargaDeCamisetas(int* pCamisas)
 
 	if (pCamisas != NULL)
 	{
-		utn_getNumero(pCamisas, " > Ingrese un numero de camiseta (1 a 99) :   ", " > Error, Ringrese un numero del  (1 a 99) \n", 1, 99, 10);
+		system("cls");
+		fflush(stdin);
+		retorno  = utn_getNumero(pCamisas, " -| Ingrese un numero de camiseta (1 a 99) :   ", " -| Error, Reingrese un numero del  (1 a 99) \n", 1, 99, 10);
 	}
 
 	return retorno;
@@ -43,8 +66,9 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 
 	if (pPosicionDeArq != NULL && pPosicionDeDef != NULL && pPosicionDeMed != NULL && pPosicionDeDel)
 	{
-
-		utn_getNumero(&auxPosicion, "> Posiciones :\n   1. Arquero\n   2. Defensores\n   3. Mediocampistas\n   4. Delanteros\n > Ingrese una Posicion:   ", " > Error, Reingrese un posicion\n", 1, 4, 10);
+		system("cls");
+		fflush(stdin);
+		utn_getNumero(&auxPosicion, " -| *** Posiciones ***\n   1- Arquero\n   2- Defensores\n   3- Mediocampistas\n   4- Delanteros\n -| Ingrese una Posicion:   ", " -| Error, Reingrese un posicion\n", 1, 4, 10);
 
 		switch(auxPosicion)
 		{
@@ -56,7 +80,7 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 				}
 				else
 				{
-					printf(" > Cantidad de Arqueros llena !!!\n\n");
+					printf(" -| Cantidad Maxima de Arqueros (2) !!!\n\n");
 					system("pause");
 				}
 				break;
@@ -68,7 +92,7 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 				}
 				else
 				{
-					printf(" > Cantidad de Defensores llena !!!\n\n");
+					printf(" -| Cantidad Maxima de Defensores (8) !!!\n\n");
 					system("pause");
 				}
 				break;
@@ -80,7 +104,7 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 				}
 				else
 				{
-					printf(" > Cantidad de Mediocampista llena !!!\n\n");
+					printf(" -| Cantidad Maxima de Mediocampista (8) !!!\n\n");
 					system("pause");
 				}
 				break;
@@ -92,7 +116,7 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 				}
 				else
 				{
-					printf(" > Cantidad de Delanteros llena !!!\n\n");
+					printf(" -| Cantidad Maxima de Delanteros (4) !!!\n\n");
 					system("pause");
 				}
 				break;
@@ -102,23 +126,104 @@ int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDe
 }
 
 
-int cargaDeConfederacion(int* pConfederaciones)
+int cargaDeConfederacion(int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC)
 {
 	int retorno = -1;
+	int auxConfederacion;
 
-	if (pConfederaciones != NULL)
+	if (pAFC != NULL && pCAF != NULL && pCONCACAF != NULL && pCONMEBOL != NULL && pUEFA != NULL && pOFC != NULL)
 	{
-		if(	utn_getNumero(pConfederaciones, " > Posiciones :\n   1. AFC\n   2. CAF\n   3. CONCACAF\n   4. CONMEBOL\n   5. UEFA\n   6. OFC\n > Ingrese una Conferacion:   ", " > Error, Reingrese una Conferacion\n", 1, 99, 10) == 1)
+		system("cls");
+		utn_getNumero(&auxConfederacion, " -| *** Confederacion ***\n   1- AFC\n   2- CAF\n   3- CONCACAF\n   4- CONMEBOL\n   5- UEFA\n   6- OFC\n -| Ingrese una Conferacion:   ", "  -| Error, Reingrese una Conferacion\n", 1, 99, 10);
+
+		switch(auxConfederacion)
 		{
-			retorno = 1;
+			case	1:
+				*pAFC = *pAFC + 1;
+				retorno = 1;
+				break;
+			case	2:
+				*pCAF = *pCAF + 1;
+				retorno = 1;
+				break;
+			case	3:
+				*pCONCACAF = *pCONCACAF + 1;
+				retorno = 1;
+				break;
+			case	4:
+				*pCONMEBOL = *pCONMEBOL + 1;
+				retorno = 1;
+				break;
+			case	5:
+				*pUEFA = *pUEFA + 1;
+				retorno = 1;
+				break;
+			case	6:
+				*pOFC = *pOFC + 1;
+				retorno = 1;
+				break;
 		}
 	}
 	return retorno;
 }
 
+float  promedioAFC (int* pAFC)
+{
+	float promedio;
+	if (pAFC != NULL)
+	{
+		promedio = (float) *pAFC / 22;
+	}
+	return promedio;
+}
 
+float  promedioCAF (int* pCAF)
+{
+	float promedio;
+	if (pCAF != NULL)
+	{
+		promedio = (float) *pCAF / 22;	}
+	return promedio;
+}
 
+float  promedioCONCACAF (int* pCONCACAF)
+{
+	float promedio;
+	if (pCONCACAF != NULL)
+	{
+		promedio = (float) *pCONCACAF / 22;
+	}
+	return promedio;
+}
 
+float  promedioCONMEBOL (int* pCONMEBOL)
+{
+	float promedio;
+	if (pCONMEBOL != NULL)
+	{
+		promedio = (float) *pCONMEBOL / 22;
+	}
+	return promedio;
+}
 
+float  promedioUEFA (int* pUEFA)
+{
+	float promedio;
+	if (pUEFA != NULL)
+	{
+		promedio = (float) *pUEFA / 22;
+	}
+	return promedio;
+}
+
+float  promedioOFC (int* pOFC)
+{
+	float promedio;
+	if (pOFC != NULL)
+	{
+		promedio = (float) *pOFC / 22;
+	}
+	return promedio;
+}
 
 
