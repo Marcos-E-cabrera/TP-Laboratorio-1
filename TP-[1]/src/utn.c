@@ -286,3 +286,17 @@ int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeErr
 	}
 	return retorno;
 }
+
+
+int validarSiONo (char* pResultado)
+{
+	int retorno = -1;
+	if(pResultado != NULL)
+	{
+		if( *pResultado == 's' || *pResultado == 'n')
+		{
+			retorno = 1;
+		}
+	}
+	return retorno;
+}

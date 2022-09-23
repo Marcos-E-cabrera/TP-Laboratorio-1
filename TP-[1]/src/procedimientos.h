@@ -6,19 +6,19 @@
 ///
 /// @param pHospedaje direccion de memoria de la variable que va a hacer ingresada por el usuario.
 /// @return 1 si esta bien  y -1 si no
-int costoHospedaje (float* pHospedaje);
+float costoHospedaje (float* pHospedaje);
 
 /// @brief pide que ingresen un numero de comida y lo valida
 ///
 /// @param pComida direccion de memoria de la variable que va a hacer ingresada por el usuario.
 /// @return 1 si esta bien  y -1 si no
-int costoComida (float* pComida);
+float costoComida (float* pComida);
 
 /// @brief pide que ingresen un numero de transporte y lo valida
 ///
 /// @param pTransporte direccion de memoria de la variable que va a hacer ingresada por el usuario.
 /// @return 1 si esta bien  y -1 si no
-int costoTransporte (float* pTransporte);
+float costoTransporte (float* pTransporte);
 
 /* punto 2 */
 

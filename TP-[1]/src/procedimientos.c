@@ -5,38 +5,38 @@
 #include "procedimientos.h"
 #include "utn.h"
 
-/* 1 ) Ingreso de los costos de Mantenimiento */
-int costoHospedaje (float* pHospedaje)
+///* 1 ) Ingreso de los costos de Mantenimiento */
+float costoHospedaje (float* pHospedaje)
 {
 	int retorno = -1;
 
 	if (pHospedaje != NULL )
 	{
-		retorno = utn_getFloat(pHospedaje, " -| Ingrese Costo de Hospedaje:  ", " -| Error, Reingrese Costo de Hospedaje\n", 1.00, 100000000.00, 5);
+		retorno = utn_getFloat(pHospedaje, "\n ( 1 ) -| Ingrese Costo de Hospedaje:  ", " -| Error, Reingrese Costo de Hospedaje\n", 1.00, 100000000.00, 5);
 	}
 
 	return retorno;
 }
 
-int costoComida (float* pComida)
+float  costoComida (float* pComida)
 {
 	int retorno = -1;
 
 	if (pComida != NULL )
 	{
-		retorno = utn_getFloat(pComida, " -| Ingrese Costo de Comida:  ", " -| Error, Reingrese Costo de Comida\n", 1.00, 100000000.00, 5);
+		retorno = utn_getFloat(pComida, "\n ( 2 ) -| Ingrese Costo de Comida:  ", " -| Error, Reingrese Costo de Comida\n", 1.00, 100000000.00, 5);
 	}
 
 	return retorno;
 }
 
-int costoTransporte (float* pTransporte)
+float costoTransporte (float* pTransporte)
 {
 	int retorno = -1;
 
 	if (pTransporte != NULL )
 	{
-		retorno = utn_getFloat(pTransporte, " -| Ingrese Costo de Trasporte:  ", " -| Error, Reingrese Costo de Trasporte\n", 1.00, 100000000.00, 5);
+		retorno = utn_getFloat(pTransporte, "\n ( 3 ) -| Ingrese Costo de Trasporte:  ", " -| Error, Reingrese Costo de Trasporte\n", 1.00, 100000000.00, 5);
 	}
 
 	return retorno;
