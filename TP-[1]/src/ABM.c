@@ -6,7 +6,7 @@
 #include "procedimientos.h"
 #include "utn.h"
 
-#define  LEN 22  /* jugadores a ingresar */
+#define  LEN_JUGADORES 22  /* jugadores a ingresar */
 
 void menuMain()
 {
@@ -15,28 +15,22 @@ void menuMain()
 	char letra;
 
 	/* Inicio del primer punto ( 1 ) */
-	/* contadores (1) */
+
+	/* contadores  de manteniento */
 	int opcionCosto;
 	float contadorHospedaje;
 	float contadorComida;
 	float contadorTrasporte;
 
-	float valorHospedaje;
-	float valorComida;
-	float valorTrasnporte;
 	/* fin del primer punto ( 1 ) */
 
 	/* Inicio del 2 punto ( 2 )*/
-	/* contadores (2) */
+
+	/* contador de jugadores */
 	int contadorArqueros;
 	int contadorDefensores;
 	int contadorMediocampistas;
 	int contadorDelanteros;
-
-	int arqueros;
-	int defensores;
-	int mediocampistas;
-	int delanteros;
 
 	int contadorAFC;
 	int contadorCAF;
@@ -45,19 +39,14 @@ void menuMain()
 	int contadorUEFA;
 	int contadorOFC;
 
-	int afc;
-	int caf;
-	int concacaf;
-	int conmebol;
-	int uefa;
-	int ofc;
-
 	int camiseta;
 	int cantidadJugadores;
-	int contadorJugador = LEN;
+	int contadorJugador = LEN_JUGADORES;
 	/* Fin del 2 punto ( 2 ) */
 
 	/* Inicio del 3 punto ( 3 )*/
+
+	/* promedio de ligas */
 	float promedioAfc;
 	float promedioCaf;
 	float promedioConcacaf;
@@ -65,52 +54,45 @@ void menuMain()
 	float promedioUefa;
 	float promedioOfc;
 
+	/* costo de mantenimiento */
+
 	float costoDeMantenimiento;
-	int contadorConfereciones;
-	float aumentoto;
 	float costoDeMantenimientoFinal;
+
+	float aumento;
+	int contadorConfereciones;
 	/* Fin del 3 punto ( 3 ) */
 
 	/* FLAGS */
 	int flag1 = 0;
 	int flag2 = 0;
+	int flag3 = 0;
 
 	char seguirEnCostos = 'n';
 	char seguir = 's';
 
-	contadorHospedaje = 0;
-	contadorComida = 0;
+	/* inicializacion de matenimiento */
+	contadorHospedaje = 2400000;
+	contadorComida = 2400000;
 	contadorTrasporte = 0;
-	valorHospedaje = 0;
-	valorComida = 0;
-	valorTrasnporte = 0;
 
-	contadorArqueros = 0;
-	contadorDefensores = 0;
-	contadorMediocampistas = 0;
-	contadorDelanteros = 0;
+	/* inicializacion de jugadores */
+	contadorArqueros = 1;
+	contadorDefensores = 8;
+	contadorMediocampistas = 8;
+	contadorDelanteros = 4;
 
-	arqueros = 0;
-	defensores = 0;
-	mediocampistas = 0;
-	delanteros = 0;
-	cantidadJugadores = 0;
-
+	contadorUEFA = 10;
+	contadorCAF = 1;
+	contadorCONMEBOL = 8;
+	contadorCONCACAF = 2;
 	contadorAFC = 0;
-	contadorCAF = 0;
-	contadorCONCACAF = 0;
-	contadorCONMEBOL = 0;
-	contadorUEFA = 0;
 	contadorOFC = 0;
-	contadorConfereciones =0;
 
-	afc = 0;
-	caf = 0;
-	concacaf = 0;
-	conmebol = 0;
-	uefa = 0;
-	ofc = 0;
+	cantidadJugadores = 0;
+	contadorConfereciones = 0;
 
+	/* inicializacion de calculos */
 	promedioAfc = 0;
 	promedioCaf  = 0;
 	promedioConcacaf = 0;
@@ -119,35 +101,36 @@ void menuMain()
 	promedioOfc = 0;
 
 	costoDeMantenimiento = 0;
-	aumentoto = 0;
+	aumento = 0;
 	costoDeMantenimientoFinal = 0;
 
 	do
 	{
 		system("cls");
-		printf("\n               *** Menu Principal ***\n");
-		printf("_______________________________________________\n");
-		printf("\n| 1 - Ingreso de los costos de Mantenimiento.\n");
-		printf("\n    - Costo de Hospedaje : $%.2f", contadorHospedaje);
-		printf("\n    - Costo de Comida : $%.2f", contadorComida);
-		printf("\n    - Costo de  Trasporte: $%.2f", contadorTrasporte);
-		printf("\n\n| 2 - Carga de jugadores.\n");
-		printf("\n    - Arqueros : %d", contadorArqueros);
-		printf("\n    - Defensores : %d", contadorDefensores);
-		printf("\n    - Medicampistas: %d", contadorMediocampistas);
-		printf("\n    - Delanteros: %d\n", contadorDelanteros);
-		printf("\n| 3 - Realizar todos los calculos.");
-		printf("\n| 4 - Informar todos los resultados.");
-		printf("\n| 5 - Salir.\n");
-		printf("_______________________________________________\n\n");
+		printf("\n ================================================\n");
+		printf("|             *** Carga de Jugadores  ***        |\n");
+		printf("|================================================|\n");
+		printf("| 1 - Ingreso de los costos de Mantenimiento.    |\n");
+		printf("|    - Costo de Hospedaje : $%-10.2f          |\n", contadorHospedaje);
+		printf("|    - Costo de Comida : $%-10.2f             |\n", contadorComida);
+		printf("|    - Costo de  Trasporte: $%-10.2f          |\n", contadorTrasporte);
+		printf("| 2 - Carga de jugadores.                        |\n");
+		printf("|    - Arqueros : %-d                              |\n", contadorArqueros);
+		printf("|    - Defensores : %-d                            |\n", contadorDefensores);
+		printf("|    - Medicampistas: %-d                          |\n", contadorMediocampistas);
+		printf("|    - Delanteros: %-d                             |\n", contadorDelanteros);
+		printf("| 3 - Realizar todos los calculos.               |\n");
+		printf("| 4 - Informar todos los resultados.             |\n");
+		printf("| 5 - Salir.                                     |\n");
+		printf(" ================================================\n");
 
-		printf(" -| Ingrese una opcion:   ");
+		printf("| Ingrese una opcion: ");
 		fflush(stdin);
 		scanf("%d", &option);
 		scanf("%c", &letra);
 
 		while ( (isalpha(letra)) || (option < 1 || option >5)){
-			printf("\n -| Error, Reingresa una opcion:   ");
+			printf("| Error, Reingresa una opcion: ");
 			fflush(stdin);
 			scanf("%d", &option);
 			scanf("%c", &letra);
@@ -159,98 +142,152 @@ void menuMain()
 			case 1:
 				do{
 					system("cls");
-					printf("_______________________________________________\n");
-					printf("\n|  >> Ingreso de los costos de Mantenimiento\n");
-					printf("_______________________________________________\n");
-					printf("\n|  ( 1 ) Costo de Hospedaje.");
-					printf("\n|  ( 2 ) Costo de Comida.");
-					printf("\n|  ( 3 ) Costo de  Trasporte.");
-					printf("\n|  ( 4 ) Salir.\n");
-					printf("_______________________________________________\n\n");
+					printf("\n ------------------------------------------------\n");
+					printf("| *** Ingreso de los costos de Mantenimiento *** |\n");
+					printf("|------------------------------------------------|\n");
+					printf("|  ( 1 ) Costo de Hospedaje.                     |\n");
+					printf("|  ( 2 ) Costo de Comida.                        |\n");
+					printf("|  ( 3 ) Costo de  Trasporte.                    |\n");
+					printf("|  ( 4 ) Salir.                                  |\n");
+					printf(" ------------------------------------------------|\n\n");
 
-					utn_getNumero(&opcionCosto, " -| Ingrese una opcion:   ", "\n -| Error, Reingresa una opcion:   ", 1, 4, 100);
+					utn_getNumero(&opcionCosto, "| Ingrese una opcion: ","| Error ", 1, 4, 100);
 
 					switch(opcionCosto)
 					{
+						/* Inicio de Carga de mantenimiento */
 						case 1:
-							if ( costoHospedaje(&valorHospedaje) == 1)
+							switch(ingresoDeCostoDeManenimiento(&contadorHospedaje))
 							{
-
-								contadorHospedaje += valorHospedaje;
-								flag1 = 1;
-							}
-							else
-							{
-								printf("\n -| ***  Error en la carga de Mantenimiento!!! ***\n");
+								case 0:
+									flag1 = 1;
+									break;
+								case 1:
+									printf("| ( ! ) Ocurrio Error (1) |\n");
+									break;
+								case -1:
+									printf("| ( ! ) Ocurrio Error (-1) |\n");
+									break;
 							}
 							break;
 						case 2:
-							if (costoComida(&valorComida) == 1)
+							switch(ingresoDeCostoDeManenimiento(&contadorComida))
 							{
-								contadorComida += valorComida;
-								flag1 = 1;
-							}
-							else
-							{
-								printf("\n -| ***  Error en la carga de Mantenimiento!!! ***\n");
+								case 0:
+									flag1 = 1;
+									break;
+								case 1:
+									printf("| ( ! ) Ocurrio Error (1) |\n");
+									break;
+								case -1:
+									printf("| ( ! ) Ocurrio Error (-1) |\n");
+									break;
 							}
 							break;
 						case 3:
-							if (costoTransporte(&valorTrasnporte) == 1)
+							switch(ingresoDeCostoDeManenimiento(&contadorTrasporte))
 							{
-								contadorTrasporte += valorTrasnporte;
-								flag1 = 1;
-							}
-							else
-							{
-								printf("\n -| ***  Error en la carga de Mantenimiento!!! ***\n");
+								case 0:
+									flag1 = 1;
+									break;
+								case 1:
+									printf("| ( ! ) Ocurrio Error (1) |\n");
+									break;
+								case -1:
+									printf("| ( ! ) Ocurrio Error (-1) |\n");
+									break;
 							}
 							break;
 						case 4:
 							seguirEnCostos = 's';
+
+							if ( flag1 == 1 )
+							{
+								printf(" ----------------------------------------\n");
+								printf("| *** Carga de Mantenimiento Exitosa *** |\n");
+								printf(" ----------------------------------------\n");
+							}
+							else
+							{
+								printf(" ----------------------------------------\n");
+								printf("| *** Carga de Mantenimiento cancela *** |\n");
+								printf(" ----------------------------------------\n");
+							}
 							break;
 						}
 					}while (seguirEnCostos != 's' );
+				/* Fin de carga de Mantenimiento */
 
 				break;
 			case 2:
-				while ( cantidadJugadores <= LEN && seguir == 's')
+				/* Inicio de carga de Jugadores */
+				while ( cantidadJugadores <= LEN_JUGADORES && seguir == 's')
 				{
 					while (seguir != 'n')
 					{
-						cargaDeCamisetas(&camiseta);
-						if (cargaDePosiciones(&arqueros, &defensores, &mediocampistas, &delanteros) == 1)
+						switch(cargaDeCamisetas(&camiseta))
 						{
-							contadorArqueros = arqueros;
-							contadorDefensores = defensores;
-							contadorMediocampistas = mediocampistas;
-							contadorDelanteros = delanteros;
-							cantidadJugadores++;
-							if (cargaDeConfederacion(&afc, &caf, &concacaf, &conmebol, &uefa, &ofc) == 1)
-							{
-								contadorAFC = afc;
-								contadorCAF = caf;
-								contadorCONCACAF = concacaf;
-								contadorCONMEBOL = conmebol;
-								contadorUEFA = uefa;
-								contadorOFC = ofc;
-								contadorJugador --;
-							}
-							flag2 = 1;
+							case 0:
+								switch(cargaDePosiciones(&contadorArqueros, &contadorDefensores, &contadorMediocampistas, &contadorDelanteros))
+								{
+									case 0:
+										switch(cargaDeConfederacion(&contadorAFC, &contadorCAF, &contadorCONCACAF, &contadorCONMEBOL, &contadorUEFA, &contadorOFC))
+										{
+											case 0:
+												printf(" -------------------------------------------------------------\n");
+												printf("| *** Carga de Camiseta, Posicion y Confederacion Exitosa *** |\n");
+												printf(" -------------------------------------------------------------\n");
+
+												cantidadJugadores++;
+												contadorJugador--;
+												flag2 = 1;
+												break;
+											case 1:
+												printf("| ( ! ) Ocurrio Error (1) en confederacin    |\n");
+												printf(" --------------------------------------------\n\n");
+												break;
+											case -1:
+												printf("| ( ! ) Ocurrio Error (-1) en confederacin    |\n");
+												printf(" ---------------------------------------------\n\n");
+												break;
+										}
+										break;
+
+									case 1:
+										printf("| ( ! ) Ocurrio Error (1) en Posicion    |\n");
+										printf(" -----------------------------------------\n\n");
+										break;
+									case -1:
+										printf("| ( ! ) Ocurrio Error (-1) en Posicion    |\n");
+										printf(" -----------------------------------------\n\n");
+										break;
+									case -2:
+										printf("| ( ! ) Ocurrio Error (-2) en Posicion    |\n");
+										printf(" -----------------------------------------\n\n");
+										break;
+								}
+
+								break;
+							case 1:
+								printf("| ( ! ) Ocurrio Error (1) en camiseta |\n");
+								break;
+							case -1:
+								printf("| ( ! ) Ocurrio Error (-1) en camiseta |\n");
+								break;
 						}
 
-						printf(" -| Cantidad de jugadores :  %d\n", contadorJugador);
+						printf("| Cantidad de Puestos vacios : %d\n", contadorJugador);
 
-						if (cantidadJugadores < LEN)
+						if (cantidadJugadores < LEN_JUGADORES)
 						{
-							printf(" -| Deseas seguir ingresando jugadores (s/n) :   ");
+							printf("| Deseas seguir ingresando jugadores (s/n) : ");
 							fflush(stdin);
 							scanf("%c", &seguir);
 							seguir = tolower(seguir);
 
 							while ( validarSiONo(&seguir) != 1)
 							{
-								printf(" -| Error, Reingresa (s/n) :   ");
+								printf("| Error, Reingresa (s/n) : ");
 								fflush(stdin);
 								scanf("%c", &seguir);
 								seguir = tolower(seguir);
@@ -262,60 +299,78 @@ void menuMain()
 					}
 				}
 
-				if (cantidadJugadores == LEN)
+				if (cantidadJugadores == LEN_JUGADORES)
 				{
-					printf("\n -| *** Cantidad maxima de jugadores!!! ***\n");
+					printf("\n| *** Cantidad maxima de jugadores *** |\n");
 				}
 				else
 				{
-					printf("\n -| *** Salida de Carga de jugadores Exitosa!!! ***\n");
+					printf("\n| *** Salida de Carga de jugadores Exitosa *** |\n");
 					seguir = 's';
 				}
+				/* fin de carga de Jugadores */
+
 				break;
 			case 3:
-				if (flag1 == 1 || flag2 == 1)
+				if (flag1 == 1 && flag2 == 1)
 				{
-					promedioAfc = promedioAFC(&contadorAFC);
-					promedioCaf = promedioCAF(&contadorCAF);
-					promedioConcacaf = promedioCONCACAF(&contadorCONCACAF);
-					promedioConmebol = promedioCONMEBOL(&contadorCONMEBOL);
-					promedioUefa =  promedioUEFA(&contadorUEFA);
-					promedioOfc = promedioOFC(&contadorOFC);
+					/* inicio de promedio */
+					promediador(&contadorAFC, &promedioAfc, LEN_JUGADORES);
+					promediador(&contadorCAF, &promedioCaf, LEN_JUGADORES);
+					promediador(&contadorCONCACAF, &promedioConcacaf, LEN_JUGADORES);
+					promediador(&contadorCONMEBOL, &promedioConmebol, LEN_JUGADORES);
+					promediador(&contadorUEFA, &promedioUefa, LEN_JUGADORES);
+					promediador(&contadorOFC, &promedioOfc, LEN_JUGADORES);
+					/* fin de promedio */
+
+
 					costoDeMantenimiento = contadorComida + contadorTrasporte + contadorHospedaje;
 					contadorConfereciones = contadorAFC + contadorCAF + contadorCONCACAF + contadorCONMEBOL + contadorOFC;
-					aumentoto = costoDeMantenimiento * 0.35;
-					costoDeMantenimientoFinal = costoDeMantenimiento + aumentoto;
-					printf("\n -| *** Calculos terminados !!! ***\n");
+
+					aumento = costoDeMantenimiento * 0.35;
+					costoDeMantenimientoFinal = costoDeMantenimiento + aumento;
+
+					flag3 = 1;
+					printf("\n| *** Calculos terminados *** |\n");
 				}
-				else{
-					printf("\n -| *** Primero Ingrese costo de Mantenimiento o Ingrese Jugadores!!! ***\n");
+
+				if ( flag1 != 1 )
+				{
+					printf("\n| ( ! ) Ingrese costo de Mantenimiento |\n");
 				}
+
+				if ( flag2 != 1)
+				{
+					printf("\n| ( ! ) Ingrese Jugadores |\n");
+				}
+
 				break;
 			case 4:
-				if (flag1 == 1 || flag2 == 1)
+				if (flag3 == 1)
 				{
-					printf("\n               *** Informal todos los Resultados ***\n");
-					printf("_______________________________________________\n");
-					printf("\n | Porcentaje Uefa :  %.2f", promedioUefa  * 100);
-					printf("\n | Porcentaje Conmebol :  %.2f", promedioConmebol * 100);
-					printf("\n | Porcentaje Concacaf :  %.2f", promedioConcacaf  * 100 );
-					printf("\n | Porcentaje Afc :  %.2f", promedioAfc  * 100);
-					printf("\n | Porcentaje Ofc :  %.2f", promedioOfc  * 100);
-					printf("\n | Porcentaje Caf:  %.2f\n", promedioCaf  * 100);
-					printf("_______________________________________________\n");
+					printf("\n -------------------------------------------\n");
+					printf("|  *** Informe de todos los Resultados ***  |\n");
+					printf("|-------------------------------------------|\n");
+					printf("| Porcentaje Uefa :  %-2.2f                  |\n", promedioUefa);
+					printf("| Porcentaje Conmebol :  %-2.2f              |\n", promedioConmebol);
+					printf("| Porcentaje Concacaf :  %-2.2f               |\n", promedioConcacaf);
+					printf("| Porcentaje Afc :  %-2.2f                    |\n", promedioAfc);
+					printf("| Porcentaje Ofc :  %-2.2f                    |\n", promedioOfc);
+					printf("| Porcentaje Caf:  %-2.2f                     |\n", promedioCaf);
+					printf(" -------------------------------------------\n");
 
 					if ( contadorUEFA >= contadorConfereciones &&  contadorConfereciones != 0)
 					{
-						printf("\n | El costo de matenimiento es de : $%.2f y recibio un aumento de $%.2f, su nuevo valor es de: $%.2f\n", costoDeMantenimiento,aumentoto, costoDeMantenimientoFinal);
+						printf("\n | El costo de matenimiento es de : $%.2f y recibio un aumento de $%.2f, su nuevo valor es de: $%.2f\n", costoDeMantenimiento,aumento, costoDeMantenimientoFinal);
 					}
 					else
 					{
 						printf("\n | El costo de matenimiento es de : $%.2f\n", costoDeMantenimiento);
 					}
-					printf("_______________________________________________\n");
+					printf("\n\n");
 				}
 				else{
-					printf("\n -| *** Primero Ingrese costo de Mantenimiento o Ingrese Jugadores!!! ***\n");
+					printf("\n| ( ! ) Primero hacer los calculos |\n");
 				}
 				break;
 			}

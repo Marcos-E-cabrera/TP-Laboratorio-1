@@ -2,82 +2,39 @@
 #define PROCEDIMIENTOS_H_
 #endif /* PROCEDIMIENTOS_H_ */
 
-/// @brief pide que ingresen un numero de camiseta y lo valida
+/// @brief pide que ingreses el costo del mantenimiento
 ///
-/// @param pHospedaje direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
-float costoHospedaje (float* pHospedaje);
-
-/// @brief pide que ingresen un numero de comida y lo valida
-///
-/// @param pComida direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
-float costoComida (float* pComida);
-
-/// @brief pide que ingresen un numero de transporte y lo valida
-///
-/// @param pTransporte direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
-float costoTransporte (float* pTransporte);
+/// @param cont contador de costo
+/// @return -1 error parametros, 1 error y 0 bien
+int ingresoDeCostoDeManenimiento ( float* pCosto );
 
 /* punto 2 */
-
 /// @brief pide que ingreses el numero de camiseta y lo valida
 ///
 /// @param pCamisas direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
+/// @return -1 error parametros, 1 error y 0 bien
 int cargaDeCamisetas(int* pCamisas);
 
-/// @brief pide que ingreses el numero de la posicion que van a jugar y lo valida
+/// @brief pide que ingreses la posicion que va a jugar y lo valida
 ///
-/// @param pPosicionDeArq direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @param pPosicionDeDef direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @param pPosicionDeMed direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @param pPosicionDeDel direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
-int cargaDePosiciones(int* pPosicionDeArq, int* pPosicionDeDef, int* pPosicionDeMed, int* pPosicionDeDel );
+/// @param cont1 direccion de memoria de la variable que va a hacer ingresada por el usuario.
+/// @param cont2 direccion de memoria de la variable que va a hacer ingresada por el usuario.
+/// @param cont3 direccion de memoria de la variable que va a hacer ingresada por el usuario.
+/// @param cont4 direccion de memoria de la variable que va a hacer ingresada por el usuario.
+/// @return -1 error parametros, 1 error, -2 error rango max y 0 bien
+int cargaDePosiciones(int* cont1, int* cont2, int* cont3, int* cont4);
 
-/// @brief  pide que ingreses el numero de confederacion y lo valida
+/// @brief  pide que ingreses la confederacion que se jugara y lo valida
 ///
 /// @param pConfederaciones direccion de memoria de la variable que va a hacer ingresada por el usuario.
-/// @return 1 si esta bien  y -1 si no
+/// @return -1 error parametros, 1 error y 0 bien
 int cargaDeConfederacion(int* pAFC, int* pCAF, int* pCONCACAF, int* pCONMEBOL, int* pUEFA, int* pOFC);
 
 /* punto 3 */
-
-/// @brief  promedia la liga AFC
+/// @brief  promedia la liga ingresada
 ///
-/// @param pAFC
-/// @return el promedio obtenido
-float  promedioAFC (int* pAFC);
-
-/// @brief  promedia la liga CAF
-///
-/// @param pAFC
-/// @return el promedio obtenido;
-float  promedioCAF (int* pCAF);
-
-/// @brief  promedia la liga CONCACAF
-///
-/// @param pAFC
-/// @return el promedio obtenido;
-float  promedioCONCACAF (int* pCONCACAF);
-
-/// @brief  promedia la liga CONMEBOL
-///
-/// @param pAFC
-/// @return el promedio obtenido
-float  promedioCONMEBOL(int* pCONMEBOL);
-
-/// @brief  promedia la liga UEFA
-///
-/// @param pAFC
-/// @return el promedio obtenido
-float  promedioUEFA (int* pUEFA);
-
-/// @brief  promedia la liga OFC
-///
-/// @param pAFC
-/// @return el promedio obtenido
-float  promedioOFC (int* pOFC);
+/// @param pCantdadLigas  cartidad total de la liga a promedear
+/// @param len cantidad de jugadores
+/// @return -1 error parametros y 0 bien
+int promediador (int* pCantdadLiga , float* promedio, int len);
 

@@ -46,6 +46,7 @@
 
  	do
  	{
+		fflush(stdin);
  		printf("%s",mensaje);
  		if(	getInt(&bufferInt) == 1 &&
  			bufferInt >= minimo &&
