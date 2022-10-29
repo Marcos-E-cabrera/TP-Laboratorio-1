@@ -72,20 +72,20 @@ void menuMain()
 	char seguir = 's';
 
 	/* inicializacion de matenimiento */
-	contadorHospedaje = 2400000;
-	contadorComida = 2400000;
+	contadorHospedaje = 0;
+	contadorComida = 0;
 	contadorTrasporte = 0;
 
 	/* inicializacion de jugadores */
-	contadorArqueros = 1;
-	contadorDefensores = 8;
-	contadorMediocampistas = 8;
-	contadorDelanteros = 4;
+	contadorArqueros = 0;
+	contadorDefensores = 0;
+	contadorMediocampistas = 0;
+	contadorDelanteros = 0;
 
-	contadorUEFA = 10;
-	contadorCAF = 1;
-	contadorCONMEBOL = 8;
-	contadorCONCACAF = 2;
+	contadorUEFA =0;
+	contadorCAF = 0;
+	contadorCONMEBOL = 0;
+	contadorCONCACAF = 0;
 	contadorAFC = 0;
 	contadorOFC = 0;
 
