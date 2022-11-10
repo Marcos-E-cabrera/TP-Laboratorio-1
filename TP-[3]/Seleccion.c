@@ -162,6 +162,7 @@ void selec_delete( Seleccion* this )
 }
 
 /* GETTERS */
+/* GETTERS */
 int selec_getId(Seleccion* this,int* id)
 {
 	int retorno = 0;
@@ -226,3 +227,4 @@ int selec_OrdenarConfedercion(void*a , void*b)
     }
     return retorno;
 }
+

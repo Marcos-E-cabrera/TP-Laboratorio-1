@@ -351,6 +351,81 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 	return retorno;
 }
 
+int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
+{
+	int retorno = 0;
+	int idSeccion;
+	int index;
+	int maxId;
+	int auxID;
+	char validacion;
+
+	Jugador* auxJugador;
+
+	if( pArrayListJugador != NULL && pArrayListSeleccion != NULL)
+	{
+		controller_listarJugadores(pArrayListJugador);
+		controller_JugadorID(&maxId);
+
+		utn_getNumero(&auxID, "| Ingrese ID del Jugador: ", "\n| ( ! ) ERROR ", 0, (maxId-1), 50);
+		index = controller_BuscarID(pArrayListJugador, auxID);
+
+		if( index == 1 )
+		{
+			printf("| ( ! ) ERROR, NO HAY JUGADOR CON ID [ %d ]",auxID);
+		}
+		else
+		{
+			auxJugador = (Jugador*) ll_get(pArrayListJugador, index);
+			if( auxJugador != NULL )
+			{
+				printf("\n================================================================================================================================\n");
+				printf("|                                              ***  CONVOCATORIA DE JUGADOR  ***                                                |\n");
+				printf("=================================================================================================================================\n");
+				printf("|  ID  |             NOMBRE             | EDAD |            POSICION            |          NACIONALIDAD          | ID SELECCION |\n");
+				printf("=================================================================================================================================\n");
+				jug_ImprimirDatos(auxJugador);
+				printf("\n\n");
+
+				printf("| CONVOCAR JUGADOR (s/n) : ");
+				fflush(stdin);
+				scanf("%c",&validacion);
+				validacion = tolower(validacion);
+
+				while( validacion != 's' && validacion != 'n')
+				{
+					printf("| ( ! ) ERROR,  CONVOCAR JUGADOR (s/n) : ");
+					fflush(stdin);
+					scanf("%c",&validacion);
+					validacion = tolower(validacion);
+				}
+
+				if ( validacion == 's' && auxJugador != NULL )
+				{
+					controller_listarSelecciones( pArrayListSeleccion );
+					utn_getNumero(&idSeccion, "| Ingrese ID SELECCION: ", "\n| ( ! ) ERROR ", 1,32 , 50);
+					index = controller_BuscarID(pArrayListSeleccion, idSeccion);
+					if( index == 1 )
+					{
+						printf("| ( ! ) ERROR, NO HAY SELECCION CON ID [ %d ]",idSeccion);
+					}
+					else
+					{
+						if ( jug_setIdSeleccion(auxJugador, idSeccion) == 1 )
+						{
+							printf("| CHETOOOOO ");
+							retorno = 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
+
+
 int controller_MunuListarPorOrden()
 {
 	int opcion;
@@ -1069,3 +1144,8 @@ int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSe
 
 	return retorno;
 }
+
+
+
+
+

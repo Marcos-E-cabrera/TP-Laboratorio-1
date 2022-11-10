@@ -127,6 +127,9 @@ int main()
     		case 5:
     			controller_listado(listaJugadores, listaSelecciones);
             	break;
+    		case 6:
+    			controller_Convocar(listaJugadores, listaSelecciones);
+            	break;
     		case 7:
     			controller_ordenarJugadoresYSelecciones(listaJugadores, listaSelecciones);
     			break;

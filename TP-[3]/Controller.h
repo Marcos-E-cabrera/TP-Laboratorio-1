@@ -7,24 +7,22 @@ int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSe
 int controller_agregarJugador(LinkedList* pArrayListJugador); //
 int controller_editarJugador(LinkedList* pArrayListJugador); //
 int controller_MunuEdit(); //
-int controller_removerJugador(LinkedList* pArrayListJugador);
-int controller_editarSeleccion(LinkedList* pArrayListSeleccion);
+int controller_removerJugador(LinkedList* pArrayListJugador);//
+int controller_editarSeleccion(LinkedList* pArrayListSeleccion);//
 
 // listado
 int controller_MunuListar(); //
-int controller_MunuListar();
-int controller_MunuListarPorOrden();
-
-int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
-int controller_listarJugadores(LinkedList* pArrayListJugador);
-int controller_listarSelecciones(LinkedList* pArrayListSeleccion);
-int controller_listarConvocados(LinkedList* pArrayListSeleccion);
+int controller_MunuListar();//
+int controller_MunuListarPorOrden();//
+int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+int controller_listarJugadores(LinkedList* pArrayListJugador);//
+int controller_listarSelecciones(LinkedList* pArrayListSeleccion);//
+int controller_listarConvocados(LinkedList* pArrayListSeleccion);//
 
 // ordenamiento
-int controller_ordenarJugadores(LinkedList* pArrayListJugador);
-int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion);
-int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
-
+int controller_ordenarJugadores(LinkedList* pArrayListJugador);//
+int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion);//
+int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
 
 // guardar
 int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJugador); //
@@ -61,3 +59,5 @@ int controller_guardarID ( FILE* pFile, char* path, LinkedList* pArrayListJugado
 /// @param pID
 /// @return 1 ok , 0 error
 int controller_BuscarMayorID ( FILE* pFile, LinkedList* pArrayListJugador, int* pID );
+
+int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
