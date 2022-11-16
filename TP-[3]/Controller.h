@@ -1,36 +1,59 @@
-// carga
-int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJugador); //
+// CARGA - JUGADORES
+int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJugador);//
 int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJugador);
-int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion);
 
-// abm
+// ABM - JUGADOR
 int controller_agregarJugador(LinkedList* pArrayListJugador); //
 int controller_editarJugador(LinkedList* pArrayListJugador); //
-int controller_MunuEdit(); //
-int controller_removerJugador(LinkedList* pArrayListJugador);//
-int controller_editarSeleccion(LinkedList* pArrayListSeleccion);//
+int controller_removerJugador(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
 
-// listado
-int controller_MunuListar(); //
+int controller_MunuEdit(); //
 int controller_MunuListar();//
 int controller_MunuListarPorOrden();//
-int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
-int controller_listarJugadores(LinkedList* pArrayListJugador);//
-int controller_listarSelecciones(LinkedList* pArrayListSeleccion);//
-int controller_listarConvocados(LinkedList* pArrayListSeleccion);//
+int controller_MunuConvocar();//
 
-// ordenamiento
+// LISTADO - JUGADOR
+int controller_listarJugadores(LinkedList* pArrayListJugador);//
+
+// ORDENAMIENTO - JUGADOR
 int controller_ordenarJugadores(LinkedList* pArrayListJugador);//
 int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion);//
-int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
 
-// guardar
+// GUARDAR - JUGADORES
 int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJugador); //
 int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJugador);
-int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion);
 
-// id
+//-------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------//
+
+// CARGA - SELECCION
+int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion);//
+
+// ABM - SELECCION
+int controller_editarSeleccion(LinkedList* pArrayListSeleccion);//
+int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+
+// LISTADO - SELECCION
+int controller_listarSelecciones(LinkedList* pArrayListSeleccion );//
+int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+int controller_listarConvocados( LinkedList* pArrayListJugador);//
+
+// ORDENAMIENTO - SELECCION
+int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+
+// FilTRO - SELECCION
+int controller_filterConfederaciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+int controller_CargaDeConvocados ( char* confederacion, LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion );//
+
+// GUARDAR - SELECCION
+int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion); //
+
+//-------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------//
+
+// ID
 int controller_BuscarID( LinkedList* pArrayListJugador, int id );
+int controller_BuscarIDSeleccion( LinkedList* pArrayListSeleccion, int id );
 
 /// @brief obtengo una id del archivo
 ///
@@ -59,5 +82,3 @@ int controller_guardarID ( FILE* pFile, char* path, LinkedList* pArrayListJugado
 /// @param pID
 /// @return 1 ok , 0 error
 int controller_BuscarMayorID ( FILE* pFile, LinkedList* pArrayListJugador, int* pID );
-
-int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);

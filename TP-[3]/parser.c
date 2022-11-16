@@ -63,9 +63,49 @@ int parser_JugadorFromText(FILE* pFile , LinkedList* pArrayListJugador)
  */
 int parser_JugadorFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
 {
-    return 1;
+	int retorno = 0;
+
+	Jugador* auxJugador;
+
+	if(pFile!=NULL)
+	{
+		printf("\n=================================================================================================================================\n");
+		printf("|                                                  LISTADO DE MUNDIAL DE QATAR                                                  |\n");
+		printf("=================================================================================================================================\n");
+		printf("|  ID  |             NOMBRE             | EDAD |            POSICION            |          NACIONALIDAD          | ID SELECCION |\n");
+		printf("=================================================================================================================================\n");
+
+		while( !feof(pFile) )
+		{
+			auxJugador = jug_new();
+
+			if( fread(auxJugador,sizeof(Jugador),1,pFile ) == 1 )
+			{
+				ll_add(pArrayListJugador, auxJugador);
+
+				jug_ImprimirDatos(auxJugador);
+			}
+		}
+
+		printf("=================================================================================================================================\n");
+
+		retorno = 1;
+	}
+	return retorno;
 }
 
+int parser_ConvocadosFromBinary(FILE* pFile , Jugador* auxJugador)
+{
+	int retorno = 0;
+
+	if(pFile!=NULL)
+	{
+		fwrite(auxJugador,sizeof(Jugador),1,pFile );
+		retorno = 1;
+	}
+
+	return retorno;
+}
 
 /** \brief Parsea los datos de los selecciones desde el archivo selecciones.csv (modo texto).
  *

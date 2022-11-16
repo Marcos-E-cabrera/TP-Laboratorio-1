@@ -72,7 +72,9 @@ int main()
 	setbuf(stdout,NULL);
 
 	int option;
+	int flag = 0;
 	char letra;
+	char validacion;
 
     LinkedList* listaJugadores = ll_newLinkedList();
     LinkedList* listaSelecciones = ll_newLinkedList();
@@ -113,34 +115,131 @@ int main()
     	{
     		case 1:
             	controller_cargarJugadoresDesdeTexto("jugadores.csv",listaJugadores);
-            	controller_cargarJugadoresDesdeTexto("selecciones.csv",listaSelecciones);
+            	controller_cargarSeleccionesDesdeTexto("selecciones.csv",listaSelecciones);
+            	flag = 1;
             	break;
     		case 2:
-            	controller_agregarJugador(listaJugadores);
+    			if ( flag == 1 )
+    			{
+					controller_agregarJugador(listaJugadores);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
             	break;
     		case 3:
-    			controller_editarJugador(listaJugadores);
+    			if ( flag == 1 )
+    			{
+    				controller_editarJugador(listaJugadores);
+				}
+				else
+				{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+				}
     			break;
     		case 4:
-    			controller_removerJugador(listaJugadores);
+    			if ( flag == 1 )
+    			{
+    				controller_removerJugador(listaJugadores, listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
     			break;
     		case 5:
-    			controller_listado(listaJugadores, listaSelecciones);
+    			if ( flag == 1 )
+    			{
+					controller_listado(listaJugadores, listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
             	break;
     		case 6:
-    			controller_Convocar(listaJugadores, listaSelecciones);
+    			if ( flag == 1 )
+    			{
+    				controller_Convocar(listaJugadores, listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
             	break;
     		case 7:
-    			controller_ordenarJugadoresYSelecciones(listaJugadores, listaSelecciones);
+    			if ( flag == 1 )
+    			{
+        			controller_ordenarJugadoresYSelecciones(listaJugadores, listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
     			break;
+    		case 8:
+    			if ( flag == 1 )
+    			{
+					controller_filterConfederaciones(listaJugadores, listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
+				break;
+    		case 9:
+    			if ( flag == 1 )
+    			{
+					controller_cargarJugadoresDesdeBinario("Convocados_Confederacion.bin", listaJugadores);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
+				break;
        		case 10:
-       			controller_guardarJugadoresModoTexto("jugadores.csv", listaJugadores);
+    			if ( flag == 1 )
+    			{
+					controller_guardarJugadoresModoTexto("jugadores.csv", listaJugadores);
+					controller_guardarSeleccionesModoTexto("selecciones.csv", listaSelecciones);
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
        			break;
+       		case 11:
+    			if ( flag == 1 )
+    			{
+    				printf("| DESEAS DE CERRAR LA APP (s/n) : ");
+					fflush(stdin);
+					scanf("%c",&validacion);
+					validacion = tolower(validacion);
+
+					while( validacion != 's' && validacion != 'n')
+					{
+						printf("| ( ! ) ERROR, SEGURO DESEAS CERRAR LA APP (s/n) : ");
+						fflush(stdin);
+						scanf("%c",&validacion);
+						validacion = tolower(validacion);
+					}
+
+					if ( validacion == 's' )
+					{
+						ll_deleteLinkedList(listaJugadores);
+						ll_deleteLinkedList(listaSelecciones);
+						letra = 's';
+					}
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    			}
+    			break;
     	}
     	system("pause");
-    }while(option  != 11);
-
+    }while( letra != 's' );
 
     return 0;
 }
-

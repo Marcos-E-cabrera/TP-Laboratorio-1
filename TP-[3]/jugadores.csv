@@ -1,28 +1,28 @@
 id,nombreCompleto,edad,posicion,nacionalidad,idSelecion
-1,Emiliano Martinez,28,Portero,Argentino,0
+1,Emiliano Martinez,28,Portero,Argentino,3
 2,Juan Musso,27,Portero,Argentino,0
-3,Agustin Marchesin,33,Portero,Argentino,0
-4,Esteban Andrada,30,Portero,Argentino,0
-5,Franco Armani,34,Portero,Argentino,0
-6,Geronimo Rulli,29,Portero,Argentino,0
-7,Agustin Rossi,25,Portero,Argentino,0
-8,Cristian Romero,23,Defensa Central,Argentino,0
-9,Lisandro Martinez,23,Defensa Central,Argentino,0
-10,Marcos Senesi,24,Defensa Central,Argentino,0
-11,Lucas Martinez quarta,25,Defensa Central,Argentino,0
-12,Facundo Medina,22,Defensa Central,Argentino,0
-13,Nicolas Otamendi,33,Defensa Central,Argentino,0
-14,German Pezzella,30,Defensa Central,Argentino,0
-15,Walter Kannemann,30,Defensa Central,Argentino,0
-16,Nehuen Perez,21,Defensa Central,Argentino,0
-17,Nicolas Tagliafico,28,Lateral Izquierdo,Argentino,0
-18,Marcos Acuna,29,Lateral Izquierdo,Argentino,0
-19,Gonzalo Montiel,24,Lateral Derecho,Argentino,0
-20,Juan Foyth,23,Lateral Derecho,Argentino,0
-21,Nahuel Molina,23,Lateral Derecho,Argentino,0
-22,Guido Rodriguez,27,Pivote,Argentino,0
+3,Agustin Marchesin,33,Portero,Argentino,3
+4,Esteban Andrada,30,Portero,Argentino,3
+5,Franco Armani,34,Portero,Argentino,3
+6,Geronimo Rulli,29,Portero,Argentino,3
+7,Agustin Rossi,25,Portero,Argentino,3
+8,Cristian Romero,23,Defensa Central,Argentino,3
+9,Lisandro Martinez,23,Defensa Central,Argentino,3
+10,Marcos Senesi,24,Defensa Central,Argentino,3
+11,Lucas Martinez quarta,25,Defensa Central,Argentino,3
+12,Facundo Medina,22,Defensa Central,Argentino,3
+3,Nicolas Otamendi,33,Defensa Central,Argentino,3
+14,German Pezzella,30,Defensa Central,Argentino,3
+15,Walter Kannemann,30,Defensa Central,Argentino,3
+16,Nehuen Perez,21,Defensa Central,Argentino,3
+17,Nicolas Tagliafico,28,Lateral Izquierdo,Argentino,3
+18,Marcos Acuna,29,Lateral Izquierdo,Argentino,3
+19,Gonzalo Montiel,24,Lateral Derecho,Argentino,3
+20,Juan Foyth,23,Lateral Derecho,Argentino,3
+21,Nahuel Molina,23,Lateral Derecho,Argentino,3
+22,Guido Rodriguez,27,Pivote,Argentino,3
 23,Leandro Paredes,27,Pivote,Argentino,0
-24,Rodrigo De paul,27,Mediocentro,Argentino,0
+24,Rodrigo De paul,27,Mediocentro,Argentino,3
 25,Giovani Lo celso,25,Mediocentro,Argentino,0
 26,Exequiel Palacios,22,Mediocentro,Argentino,0
 27,Nicolas Dominguez,23,Mediocentro,Argentino,0
@@ -369,3 +369,4 @@ id,nombreCompleto,edad,posicion,nacionalidad,idSelecion
 368,Almoez Ali,26,Delantero Centro,Qatari,0
 369,Ahmed Alaaeldin,29,Delantero Centro,Qatari,0
 370,Mohammed Muntari,28,Delantero Centro,Qatari,0
+371,Marcos Elias cabrera,19,Defensa Central,Argentino,8

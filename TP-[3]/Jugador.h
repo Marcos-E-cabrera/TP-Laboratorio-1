@@ -43,8 +43,15 @@ int jug_DescNacionalidad(int* numNacionalidad, char* desc);
 int jug_getEdad(Jugador* this,int* edad);
 int jug_getSIdSeleccion(Jugador* this,int* idSeleccion);
 
+int jug_getSeleccion( int* id, char* desc );
+
 int jug_OrdenarNacionalidad(void*a , void*b);
 int jug_OrdenarEdad(void*a , void*b);
 int jug_OrdenarNombre(void*a , void*b);
+
+void func_listarJugador(LinkedList* pArrayListJugador);
+void func_listarSeleccion(LinkedList* pArrayListSeleccion);
+void func_listarConvcados(LinkedList* pArrayListJugador);
+
 
 #endif // jug_H_INCLUDED

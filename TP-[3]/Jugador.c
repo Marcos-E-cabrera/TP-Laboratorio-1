@@ -5,17 +5,34 @@
 
 #include "Jugador.h"
 #include "seleccion.h"
+#include "controller.h"
+
+
+void func_listarJugador(LinkedList* pArrayListJugador)
+{
+	controller_listarJugadores(pArrayListJugador);
+}
+
+void func_listarSeleccion(LinkedList* pArrayListSeleccion )
+{
+	controller_listarSelecciones(pArrayListSeleccion);
+}
+
+void func_listarConvcados( LinkedList* pArrayListJugador)
+{
+	controller_listarConvocados(pArrayListJugador);
+}
 
 int jug_ImprimirDatos( Jugador* auxJugador )
 {
 	int retorno = 0;
-
 	int id;
 	char nombreCompleto[30];
 	int edad;
 	char posicion[30];
 	char nacionalidad[30];
 	int idSeleccion;
+	char seleccion[30];
 
 	if(auxJugador!=NULL)
 	{
@@ -26,7 +43,16 @@ int jug_ImprimirDatos( Jugador* auxJugador )
 		jug_getNacionalidad(auxJugador, nacionalidad);
 		jug_getSIdSeleccion(auxJugador, &idSeleccion);
 
-        printf("| %-4d | %-30s | %-4d | %-30s | %-30s |     %-4d     |\n", id,nombreCompleto,edad,posicion,nacionalidad,idSeleccion );
+		if ( idSeleccion == 0)
+		{
+			strcpy( seleccion, "No Convocado" );
+		}
+		else
+		{
+			jug_getSeleccion(&idSeleccion, seleccion);
+		}
+
+        printf("| %-4d | %-30s | %-4d | %-30s | %-30s | %-14s |\n", id,nombreCompleto,edad,posicion,nacionalidad,seleccion );
         retorno=1;
 	}
 	return retorno;
@@ -278,6 +304,115 @@ int jug_DescNacionalidad (int* numNacionalidad, char* desc)
     return retorno;
 }
 
+int jug_getSeleccion( int* id, char* desc )
+{
+    int retorno = 0;
+    if(desc != NULL && id != NULL )
+    {
+      	switch(*id)
+		{
+		case 1:
+			strcpy(desc, "Alemania");
+			break;
+		case 2:
+			strcpy(desc, "Arabia Saudita ");
+			break;
+		case 3:
+			strcpy(desc, "Argentina");
+			break;
+		case 4:
+			strcpy(desc, "Australia");
+			break;
+		case 5:
+			strcpy(desc, "Belgica");
+			break;
+		case 6:
+			strcpy(desc, "Brasil");
+			break;
+		case 7:
+			strcpy(desc, "Camerun");
+			break;
+		case 8:
+			strcpy(desc, "Canada");
+			break;
+		case 9:
+			strcpy(desc, "Corea del Sur");
+			break;
+		case 10:
+			strcpy(desc, "Costa Rica");
+			break;
+		case 11:
+			strcpy(desc, "Croacia");
+			break;
+		case 12:
+			strcpy(desc, "Dinamarca");
+			break;
+		case 13:
+			strcpy(desc, "Ecuador");
+			break;
+		case 14:
+			strcpy(desc, "Espana");
+			break;
+		case 15:
+			strcpy(desc, "Estados Unidos");
+			break;
+		case 16:
+			strcpy(desc, "Francia");
+			break;
+		case 17:
+			strcpy(desc, "Gales");
+			break;
+		case 18:
+			strcpy(desc, "Ghana");
+			break;
+		case 19:
+			strcpy(desc, "Holanda");
+			break;
+		case 20:
+			strcpy(desc, "Inglaterra");
+			break;
+		case 21:
+			strcpy(desc, "Iran");
+			break;
+		case 22:
+			strcpy(desc, "Japon");
+			break;
+		case 23:
+			strcpy(desc, "Marruecos");
+			break;
+		case 24:
+			strcpy(desc, "Mexico");
+			break;
+		case 25:
+			strcpy(desc, "Polonia");
+			break;
+		case 26:
+			strcpy(desc, "Portugal ");
+			break;
+		case 27:
+			strcpy(desc, "Qatar");
+			break;
+		case 28:
+			strcpy(desc, "Senegal");
+			break;
+		case 29:
+			strcpy(desc, "Serbia");
+			break;
+		case 30:
+			strcpy(desc, "Suiza");
+			break;
+		case 31:
+			strcpy(desc, "Tunez");
+			break;
+		case 32:
+			strcpy(desc, "Uruguay");
+			break;
+		}
+		retorno = 1;
+    }
+    return retorno;
+}
+
 int jug_getPosicion(Jugador* this,char* posicion)
 {
     int retorno = 0;
@@ -433,3 +568,4 @@ int jug_OrdenarNombre(void*a , void*b)
     }
     return retorno;
 }
+
