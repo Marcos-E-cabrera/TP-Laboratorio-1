@@ -263,7 +263,7 @@ int controller_NewID(int id)
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+\return 1 bien , 0 mal
  *
  */
 int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJugador)
@@ -346,7 +346,7 @@ int controller_cargarJugadoresDesdeTexto(char* path , LinkedList* pArrayListJuga
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion)
@@ -396,12 +396,11 @@ int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSe
 	return retorno;
 }
 
-
 /** \brief Carga los datos de los jugadores desde el archivo generado en modo binario.
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJugador)
@@ -460,7 +459,7 @@ int controller_cargarJugadoresDesdeBinario(char* path , LinkedList* pArrayListJu
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_agregarJugador(LinkedList* pArrayListJugador)
@@ -574,11 +573,10 @@ int controller_agregarJugador(LinkedList* pArrayListJugador)
 	return retorno;
 }
 
-
-/// @brief
+/// @brief Edita el jugador
 ///
 /// @param pArrayListJugador
-/// @return
+/// @return 1 bien , 0 mal 1 bien , 0 mal
 int controller_editarJugador(LinkedList* pArrayListJugador)
 {
 	int retorno = 0;
@@ -837,12 +835,11 @@ int controller_editarJugador(LinkedList* pArrayListJugador)
 	return retorno;
 }
 
-
 /** \brief Baja del jugador
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_removerJugador(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
@@ -930,12 +927,12 @@ int controller_removerJugador(LinkedList* pArrayListJugador, LinkedList* pArrayL
 	return retorno;
 }
 
-
+// checkear
 /** \brief Modificar datos de empleado
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_editarSeleccion(LinkedList* pArrayListSeleccion)
@@ -943,7 +940,11 @@ int controller_editarSeleccion(LinkedList* pArrayListSeleccion)
     return 1;
 }
 
-
+/// @brief Convoca o Desconvoca Jugadores
+///
+/// @param pArrayListJugador
+/// @param pArrayListSeleccion
+/// @return 1 bien , 0 mal
 int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion )
 {
 	int retorno = 0;
@@ -1094,11 +1095,48 @@ int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListS
 
 // -------------------- CONTROLLER LISTAR  ------------------------------------------------ //
 
+/// @brief Menu de Listados
+///
+/// @param pArrayListJugador
+/// @param pArrayListSeleccion
+/// @return 1 bien , 0 mal
+int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
+{
+	int retorno = 0;
+	char salir;
+
+	if (pArrayListJugador != NULL && pArrayListSeleccion != NULL)
+	{
+		do
+		{
+			switch( controller_MunuListar() )
+			{
+			case 1:
+				func_listarJugador(pArrayListJugador);
+				break;
+			case 2:
+				func_listarSeleccion(pArrayListSeleccion);
+				break;
+			case 3:
+				func_listarConvcados(pArrayListJugador);
+				break;
+			case 4:
+				printf("| SALISTE DEL MENU DE LISTADO\n");
+				salir = 's';
+				break;
+			}
+			system("pause");
+		}while ( salir != 's' );
+	}
+
+	return retorno;
+}
+
 /** \brief Listar jugadores
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+ \return 1 bien , 0 mal
  *
  */
 int controller_listarJugadores(LinkedList* pArrayListJugador)
@@ -1132,35 +1170,83 @@ int controller_listarJugadores(LinkedList* pArrayListJugador)
 	return retorno;
 }
 
-int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
+/// @brief Listado de convcados
+///
+/// @param pArrayListJugador
+/// @return 1 bien , 0 mal
+int controller_listarConvocados(LinkedList* pArrayListJugador)
 {
 	int retorno = 0;
-	char salir;
+	int len;
+	int idSeleccion;
+	char nombre[30];
 
-	if (pArrayListJugador != NULL && pArrayListSeleccion != NULL)
+	Jugador* auxJugador;
+
+	if (pArrayListJugador != NULL)
 	{
-		do
+		len = ll_len(pArrayListJugador);
+		if (len > 0 )
 		{
-			switch( controller_MunuListar() )
+			retorno = 1;
+			printf("\n==============================================\n");
+			printf("|         ** LISTADO DE CONVOCADOS **        |\n");
+			printf("==============================================\n");
+			for (int i = 0; i < len; i++)
 			{
-			case 1:
-				func_listarJugador(pArrayListJugador);
-				break;
-			case 2:
-				func_listarSeleccion(pArrayListSeleccion);
-				break;
-			case 3:
-				func_listarConvcados(pArrayListJugador);
-				break;
-			case 4:
-				printf("| SALISTE DEL MENU DE LISTADO\n");
-				salir = 's';
-				break;
-			}
-			system("pause");
-		}while ( salir != 's' );
-	}
+				auxJugador = (Jugador*) ll_get(pArrayListJugador, i);
+				jug_getSIdSeleccion(auxJugador, &idSeleccion);
 
+				if (auxJugador != NULL && idSeleccion > 0)
+				{
+					jug_getNombreCompleto(auxJugador, nombre);
+
+					printf("| %-30s             |\n", nombre);
+				}
+			}
+			printf("==============================================\n");
+		}
+	}
+	return retorno;
+}
+
+/** \brief Listar selecciones
+ *
+ * \param path char*
+ * \param pArrayListSeleccion LinkedList*
+ \return 1 bien , 0 mal
+ *
+ */
+int controller_listarSelecciones( LinkedList* pArrayListSeleccion )
+{
+	int retorno = 0;
+	int len;
+
+	Seleccion* auxSeleccion;
+
+	if (pArrayListSeleccion != NULL )
+	{
+		len = ll_len(pArrayListSeleccion);
+
+		if (len > 0 )
+		{
+			retorno = 1;
+			printf("=========================================================================================\n");
+			printf("|                             LISTADO DE LAS SELECCIONES                                |\n");
+			printf("=========================================================================================\n");
+			printf("|  ID  |              PAIS              |          CONDEFEDARION         |  CONVOCADOS  |\n");
+			printf("=========================================================================================\n");
+			for (int i = 0; i < len; i++)
+			{
+				auxSeleccion = (Seleccion*) ll_get(pArrayListSeleccion, i);
+				if ( auxSeleccion != NULL )
+				{
+					selec_ImprimirDatos(auxSeleccion);
+				}
+			}
+			printf("=========================================================================================\n");
+		}
+	}
 	return retorno;
 }
 
@@ -1168,19 +1254,11 @@ int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSele
 
 // -------------------- CONTROLLER ORDENAMIENTO  ------------------------------------------------ //
 
-/** \brief Ordenar jugadores
- *
- * \param path char*
- * \param pArrayListJugador LinkedList*
- * \return int
- *
- */
-int controller_ordenarJugadores(LinkedList* pArrayListJugador)
-{
-	int retorno = 0;
-	return retorno;
-}
-
+/// @brief Ordena jugadoes y seleccion
+///
+/// @param pArrayListJugador
+/// @param pArrayListSeleccion
+/// @return 1 bien , 0 mal
 int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
 {
 	int retorno = 0;
@@ -1197,6 +1275,11 @@ int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, Linke
 		        func_listarJugador(pArrayListJugador);
 		        printf("| ORDENADO CON EXITO\n");
 				break;
+			case 2:
+				ll_sort( pArrayListSeleccion, selec_OrdenarConfedercion, 1);
+				func_listarSeleccion(pArrayListSeleccion);
+				printf("| ORDENADO CON EXITO\n");
+				break;
 			case 3:
 		        ll_sort( pArrayListJugador, jug_OrdenarEdad, 0);
 		        func_listarJugador(pArrayListJugador);
@@ -1206,11 +1289,6 @@ int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, Linke
 		        ll_sort( pArrayListJugador, jug_OrdenarNombre, 1);
 		        func_listarJugador(pArrayListJugador);
 		        printf("| ORDENADO CON EXITO\n");
-				break;
-			case 2:
-				ll_sort( pArrayListSeleccion, selec_OrdenarConfedercion, 1);
-				func_listarSeleccion(pArrayListSeleccion);
-				printf("| ORDENADO CON EXITO\n");
 				break;
 			case 5:
 				printf("| SALISTE DEL MENU DE LISTADO\n");
@@ -1231,7 +1309,7 @@ int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, Linke
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+\return 1 bien , 0 mal
  *
  */
 int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJugador)
@@ -1302,7 +1380,7 @@ int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJuga
  *
  * \param path char*
  * \param pArrayListJugador LinkedList*
- * \return int
+\return 1 bien , 0 mal
  *
  */
 int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJugador)
@@ -1312,83 +1390,11 @@ int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJu
 
 // -------------------- FIN CONTROLLER GUARDAR  ------------------------------------------------ //
 
-
-/** \brief Listar selecciones
- *
- * \param path char*
- * \param pArrayListSeleccion LinkedList*
- * \return int
- *
- */
-int controller_listarSelecciones( LinkedList* pArrayListSeleccion )
-{
-	int retorno = 0;
-	int len;
-
-	Seleccion* auxSeleccion;
-
-	if (pArrayListSeleccion != NULL )
-	{
-		len = ll_len(pArrayListSeleccion);
-
-		if (len > 0 )
-		{
-			retorno = 1;
-			printf("=========================================================================================\n");
-			printf("|                             LISTADO DE LAS SELECCIONES                                |\n");
-			printf("=========================================================================================\n");
-			printf("|  ID  |              PAIS              |          CONDEFEDARION         |  CONVOCADOS  |\n");
-			printf("=========================================================================================\n");
-			for (int i = 0; i < len; i++)
-			{
-				auxSeleccion = (Seleccion*) ll_get(pArrayListSeleccion, i);
-				if ( auxSeleccion != NULL )
-				{
-					selec_ImprimirDatos(auxSeleccion);
-				}
-			}
-			printf("=========================================================================================\n");
-		}
-	}
-	return retorno;
-}
-
-int controller_listarConvocados(LinkedList* pArrayListJugador)
-{
-	int retorno = 0;
-	int len;
-	int idSeleccion;
-	char nombre[30];
-
-	Jugador* auxJugador;
-
-	if (pArrayListJugador != NULL)
-	{
-		len = ll_len(pArrayListJugador);
-		if (len > 0 )
-		{
-			retorno = 1;
-			printf("\n==============================================\n");
-			printf("|         ** LISTADO DE CONVOCADOS **        |\n");
-			printf("==============================================\n");
-			for (int i = 0; i < len; i++)
-			{
-				auxJugador = (Jugador*) ll_get(pArrayListJugador, i);
-				jug_getSIdSeleccion(auxJugador, &idSeleccion);
-
-				if (auxJugador != NULL && idSeleccion > 0)
-				{
-					jug_getNombreCompleto(auxJugador, nombre);
-
-					printf("| %-30s             |\n", nombre);
-				}
-			}
-			printf("==============================================\n");
-		}
-	}
-	return retorno;
-}
-
+/// @brief Filtra por Confederacion
+///
+/// @param pArrayListJugador
+/// @param pArrayListSeleccion
+/// @return 1 bien , 0 mal 1 bien , 0 mal
 int controller_filterConfederaciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion)
 {
     int retorno = 0;
@@ -1490,32 +1496,11 @@ int controller_filterConfederaciones(LinkedList* pArrayListJugador, LinkedList* 
     return retorno;
 }
 
-int controller_CargaDeConvocados ( char* confederacion, LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion )
-{
-    int retorno = 0;
-
-
-	return retorno;
-}
-
-
-/** \brief Ordenar selecciones
- *
- * \param path char*
- * \param pArrayListSeleccion LinkedList*
- * \return int
- *
- */
-int controller_ordenarSelecciones(LinkedList* pArrayListSeleccion)
-{
-    return 1;
-}
-
 /** \brief Guarda los datos de los selecciones en el archivo selecciones.csv (modo texto).
  *
  * \param path char*
  * \param pArrayListSeleccion LinkedList*
- * \return int
+\return 1 bien , 0 mal
  *
   */
 int controller_guardarSeleccionesModoTexto(char* path , LinkedList* pArrayListSeleccion)

@@ -5,6 +5,10 @@
 
 #include "seleccion.h"
 
+/// @brief Impreme datos de la seleccion
+///
+/// @param auxSeleccion
+/// @return 1 bien, 0 mal
 int selec_ImprimirDatos( Seleccion* auxSeleccion )
 {
 	int retorno = 0;
@@ -27,7 +31,9 @@ int selec_ImprimirDatos( Seleccion* auxSeleccion )
 	return retorno;
 }
 
-
+/// @brief Crea un nuevo seleccion y vacia los parametros
+///
+/// @return 1 bien, 0 mal
 Seleccion* selec_new()
 {
 	Seleccion* newSeleccion = (Seleccion*) malloc( sizeof(Seleccion) );
@@ -42,6 +48,13 @@ Seleccion* selec_new()
 	return newSeleccion;
 }
 
+/// @brief pide los parametros y los carga
+///
+/// @param idStr
+/// @param paisStr
+/// @param confederacionStr
+/// @param convocadosStr
+/// @return 1 bien, 0 mal
 Seleccion* selec_newParametros(char* idStr,char* paisStr,char* confederacionStr, char* convocadosStr)
 {
 	Seleccion* newSeleccion = selec_new();
@@ -52,7 +65,6 @@ Seleccion* selec_newParametros(char* idStr,char* paisStr,char* confederacionStr,
 		strcpy(newSeleccion->pais, paisStr);
 		strcpy(newSeleccion->confederacion, confederacionStr);
 		newSeleccion->convocados = atoi(convocadosStr);
-
 	}
 	else
 	{
@@ -64,6 +76,11 @@ Seleccion* selec_newParametros(char* idStr,char* paisStr,char* confederacionStr,
 
 /* GETTERS */
 
+/// @brief devuelve la id seleccion
+///
+/// @param this
+/// @param id
+/// @return 1 bien, 0 mal
 int selec_getId(Seleccion* this,int* id)
 {
 	int retorno = 0;
@@ -75,6 +92,11 @@ int selec_getId(Seleccion* this,int* id)
 	return retorno;
 }
 
+/// @brief devuelve el pais de la seleccion
+///
+/// @param this
+/// @param pais
+/// @return 1 bien, 0 mal
 int selec_getPais(Seleccion* this,char* pais)
 {
 	int retorno = 0;
@@ -86,6 +108,11 @@ int selec_getPais(Seleccion* this,char* pais)
 	return retorno;
 }
 
+/// @brief devuelve la confederacion
+///
+/// @param this
+/// @param confederacion
+/// @return 1 bien, 0 mal
 int selec_getConfederacion(Seleccion* this,char* confederacion)
 {
 	int retorno = 0;
@@ -97,6 +124,11 @@ int selec_getConfederacion(Seleccion* this,char* confederacion)
 	return retorno;
 }
 
+/// @brief devuelve convocado
+///
+/// @param this
+/// @param convocados
+/// @return 1 bien, 0 mal
 int selec_getConvocados(Seleccion* this,int* convocados)
 {
 	int retorno = 0;
@@ -108,8 +140,13 @@ int selec_getConvocados(Seleccion* this,int* convocados)
 	return retorno;
 }
 
-
 // SETTERS
+
+/// @brief  valida los convocados
+///
+/// @param this
+/// @param convocados
+/// @return 1 bien, 0 mal
 int selec_setConvocados(Seleccion* this,int convocados)
 {
 	int retorno = 0;
@@ -124,6 +161,12 @@ int selec_setConvocados(Seleccion* this,int convocados)
 }
 
 // ORDENAMIENTO
+
+/// @brief Funcion para ordena confederacion
+///
+/// @param a
+/// @param b
+/// @return 1 bien, 0 mal
 int selec_OrdenarConfedercion(void*a , void*b)
 {
 	int retorno =0;
@@ -145,6 +188,9 @@ int selec_OrdenarConfedercion(void*a , void*b)
     return retorno;
 }
 
+/// @brief Elimina la seleccion
+///
+/// @param this
 void selec_delete( Seleccion* this )
 {
 	free (this);

@@ -94,6 +94,11 @@ int parser_JugadorFromBinary(FILE* pFile , LinkedList* pArrayListJugador)
 	return retorno;
 }
 
+///	@brief Parsea los datos de los convocados desde el archivo binario
+///
+/// @param pFile
+/// @param auxJugador
+/// @return
 int parser_ConvocadosFromBinary(FILE* pFile , Jugador* auxJugador)
 {
 	int retorno = 0;
