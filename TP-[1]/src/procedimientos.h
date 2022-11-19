@@ -8,6 +8,8 @@
 /// @return -1 error parametros, 1 error y 0 bien
 int ingresoDeCostoDeManenimiento ( float* pCosto );
 
+int menu_Mantenimiento ();
+
 /* punto 2 */
 /// @brief pide que ingreses el numero de camiseta y lo valida
 ///

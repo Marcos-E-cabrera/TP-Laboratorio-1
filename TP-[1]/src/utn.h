@@ -17,7 +17,7 @@ int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeErr
 int getNombre(char* pResultado,int longitud);
 int isNombre(char* cadena,int longitud);
 
-int validarSiONo (char* pResultado);
+int inicialesAMayuscula ( char* cadena );
+void validarSiONo (char* pResultado);
 
 #endif /* UTN_H_ */
-
