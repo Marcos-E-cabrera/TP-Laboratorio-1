@@ -113,7 +113,7 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
             else
             {
             	/* Incio de la carga del jugador: nombre, posicion, camiseta, confederacion, salario y aniocontrato */
-            	validar_Nombre(newJugador.nombre, 50, "|> Ingrese el Nombre: ", "| Error ", 10);
+            	utn_getNombre(newJugador.nombre, 50, "|> Ingrese el Nombre: ", "| Error ", 50);
             	inicialesAMayuscula(newJugador.nombre);
 
             	fflush(stdin);
@@ -126,34 +126,29 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
             	printf("| 4- Delantero       |\n");
             	printf(" --------------------\n");
 
-            	if( utn_getNumero(&auxPosicion, "|> Ingrese una Posicion: ", "| Error ", 1, 4, 10) != 1)
-            	{
-            		retorno = 1;
-            	}
+            	utn_getNumero(&auxPosicion, "|> Ingrese una Posicion: ", "| Error ", 1, 4, 50);
 
-            	retorno = 0;
             	switch(auxPosicion)
             	{
             	case 1:
-            		strcpy(newJugador.posicion,"Arquero");
+            		strcpy(newJugador.posicion,"ARQUERO");
             		break;
             	case 2:
-            		strcpy(newJugador.posicion,"Defensor");
+            		strcpy(newJugador.posicion,"DEFENSOR");
             		break;
             	case 3:
-            		strcpy(newJugador.posicion,"Mediocampista");
+            		strcpy(newJugador.posicion,"MEDIOCAMPISTA");
             		break;
             	case 4:
-            		strcpy(newJugador.posicion,"Delantero");
+            		strcpy(newJugador.posicion,"DELANTERO");
             		break;
             	}
 
-                utn_getNumero(&auxCamiseta, "|> Ingrese numero de Camiseta : ", "| Error ", 0, 100, 10);
+                utn_getNumero(&auxCamiseta, "|> Ingrese numero de Camiseta : ", "| Error ", 1, 99, 50);
                 newJugador.numeroCamiseta = (short) auxCamiseta;
 
                 listar_confederacion(confederacion, lenConfederacion);
-                printf("|> Ingrese Id Confederacion: ");
-                scanf("%d", &newJugador.idConfederacion);
+                utn_getNumero(&newJugador.idConfederacion, "|> Ingrese  Id Confederacion: ", "| Error ", 100, 105, 50);
 
                 while(!validar_confederacion(confederacion, lenConfederacion, newJugador.idConfederacion))
                 {
@@ -162,9 +157,9 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
                 }
 
         		fflush(stdin);
-                utn_getFloat(&newJugador.salario, "|> Ingrese el Salario: ", "| Error ", 0.00, 1000000.00, 10);
+                utn_getFloat(&newJugador.salario, "|> Ingrese el Salario: ", "| Error ", 0.00, 100000.00, 50);
         		fflush(stdin);
-                utn_getNumero(&auxContrato, "|> Ingrese Anios de Contrato: ", "| Error ", 0, 60, 10);
+                utn_getNumero(&auxContrato, "|> Ingrese Anios de Contrato: ", "| Error ", 1, 20, 50);
                 newJugador.aniosContrato = (short) auxContrato;
             	/* Fin de la carga del jugador */
 
@@ -190,19 +185,16 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
     return retorno;
 }
 
-
 int baja_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion)
 {
     int retorno = 0;
-
     int indice;
     int id;
-
     char confirmacion;
 
     if(jugador != NULL && len > 0)
     {
-    	listar_Jugador(jugador, len, confederacion, lenConfederacion);
+    	listarPorID(jugador, len, confederacion, lenConfederacion);
     	printf("|> Ingrese ID: ");
         scanf("%d", &id);
 
@@ -214,9 +206,9 @@ int baja_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], in
             }
             else
             {
-                printf("\n=============================================================================================================\n");
+                printf("\n======================================================================================================================\n");
             	mostrar_Jugador(jugador[indice], confederacion, lenConfederacion);
-                printf("=============================================================================================================\n");
+                printf("======================================================================================================================\n");
 
             	printf("\n|> Confirma baja ( s / n)?: ");
                 fflush(stdin);
@@ -245,14 +237,11 @@ int baja_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], in
     return retorno;
 }
 
-
 int modificar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion)
 {
     int retorno = 0;
-
     int id;
     int indice;
-
     char salir = 'n';
     int auxPosicion;
     int auxCamiseta;
@@ -260,7 +249,7 @@ int modificar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[
 
     if(jugador != NULL && len > 0)
     {
-    	listar_Jugador(jugador, len, confederacion, lenConfederacion);
+    	listarPorID(jugador, len, confederacion, lenConfederacion);
     	printf("|> Ingrese ID: ");
         scanf("%d", &id);
 
@@ -272,17 +261,17 @@ int modificar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[
             }
             else
             {
-            	printf("\n=============================================================================================================\n");
+                printf("\n======================================================================================================================\n");
             	mostrar_Jugador(jugador[indice], confederacion, lenConfederacion);
-            	printf("=============================================================================================================\n");
+            	printf("======================================================================================================================\n");
 
                 do
                 {
                     switch( menu_Jugador() )
                     {
-
                     case 1:
-                    	validar_Nombre(jugador[indice].nombre, 50, "|> Ingrese el Nombre: ", "| Error ", 10);
+                    	fflush(stdin);
+                    	utn_getNombre(jugador[indice].nombre, 50, "|> Ingrese el Nombre: ", "| Error ", 50);
                     	inicialesAMayuscula(jugador[indice].nombre);
                         break;
                     case 2:
@@ -296,12 +285,8 @@ int modificar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[
                     	printf("| 4- Delantero       |\n");
                     	printf(" --------------------\n");
 
-                    	if( utn_getNumero(&auxPosicion, "|> Ingrese una Posicion: ", "| Error ", 1, 4, 10) != 1)
-                    	{
-                    		retorno = 1;
-                    	}
+                    	utn_getNumero(&auxPosicion, "|> Ingrese una Posicion: ", "| Error ", 1, 4, 50);
 
-                    	retorno = 0;
                     	switch(auxPosicion)
                     	{
                     	case 1:
@@ -319,27 +304,28 @@ int modificar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[
                     	}
                     	break;
                     case 3:
-                    	utn_getNumero(&auxCamiseta, "|> Ingrese numero de Camiseta : ", "| Error ", 0, 100, 10);
+                    	fflush(stdin);
+                    	utn_getNumero(&auxCamiseta, "|> Ingrese numero de Camiseta : ", "| Error ", 1, 99, 50);
                     	jugador[indice].numeroCamiseta = (short) auxCamiseta;
                         break;
                     case 4:
-                    	listar_confederacion(confederacion, lenConfederacion);
-                    	printf("|> Ingrese Id Confederacion: ");
-                    	scanf("%d", &jugador[indice].idConfederacion);
-
-                    	while(!validar_confederacion(confederacion, lenConfederacion, jugador[indice].idConfederacion))
-                    	{
-                    		printf("|> Confederacion invalida.\nReingrese Id Confederacion: ");
-                    		scanf("%d", &jugador[indice].idConfederacion);
-                    	}
+                    	fflush(stdin);
+                    	utn_getFloat(&jugador[indice].salario, "|> Ingrese el Salario: ", "| Error ", 0.00, 100000.00, 50);
                         break;
                     case 5:
                     	fflush(stdin);
-                    	utn_getFloat(&jugador[indice].salario, "|> Ingrese el Salario: ", "| Error ", 0.00, 1000000.00, 10);
+                    	listar_confederacion(confederacion, lenConfederacion);
+                        utn_getNumero(&jugador[indice].idConfederacion, "|> Ingrese  Id Confederacion: ", "| Error ", 100, 105, 50);
+
+                        while(!validar_confederacion(confederacion, lenConfederacion, jugador[indice].idConfederacion))
+                        {
+                        	printf("|> Confederacion invalida.\nReingrese Id Confederacion: ");
+                        	scanf("%d", &jugador[indice].idConfederacion);
+                        }
                         break;
                     case 6:
                     	fflush(stdin);
-                    	utn_getNumero(&auxContrato, "|> Ingrese Anios de Contrato: ", "| Error ", 0, 60, 10);
+                    	utn_getNumero(&auxContrato, "|> Ingrese Anios de Contrato: ", "| Error ", 1, 20, 50);
                     	jugador[indice].aniosContrato = (short) auxContrato;
                         break;
                     case 7:
@@ -399,8 +385,16 @@ int menu_Jugador()
     printf("| 6 - Contrato                 |\n");
     printf("| 7 - Salir                    |\n");
     printf(" ------------------------------\n");
-    printf("|> Ingrese opcion: ");
-    scanf("%d", &opcion);
+	printf("| Ingrese una opcion:  ");
+	fflush(stdin);
+	scanf("%d", &opcion);
+
+	while( opcion < 1 || opcion > 7 )
+	{
+		fflush(stdin);
+		printf("| Ingrese una opcion:  ");
+		scanf("%d", &opcion);
+	}
     return opcion;
 }
 
@@ -408,7 +402,6 @@ int listar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], 
 {
     int retorno = 0;
     int flag = 0;
-//    int auxSwap;
 
     if(jugador != NULL && len > 0)
     {
@@ -416,12 +409,13 @@ int listar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], 
         printf("\n======================================================================================================================\n");
         printf("|  ID |              NOMBRE            |   POSICION    | N%cCAMISETA |   SUELDO    | CONFEDERACION | A%cOS DE CONTRATO |\n",167,165);
         printf("======================================================================================================================\n");
-        for(int i=0; i < len; i++)
+        for(int i = 0; i < len; i++)
         {
-            if( jugador[i].isEmpty == 1)
+            if( jugador[i].isEmpty == 1 )
             {
             	mostrar_Jugador(jugador[i], confederacion, len);
-                flag++;
+            	flag++;
+
             }
         }
         if(flag == 0)
@@ -478,7 +472,6 @@ int informesDe_Jugador(eJugador jugador[], int len, eConfederacion confederacion
     return retorno;
 }
 
-
 int menu_Listado()
 {
     int opcion;
@@ -489,12 +482,22 @@ int menu_Listado()
     printf("| 1 - Listado de los jugadores ordenados alfabeticamente por nombre de confederacion y nombre de jugador.   |\n");
     printf("| 2 - Listado de confederaciones con sus jugadores.                                                         |\n");
     printf("| 3 - Total y promedio de todos los salarios y cuantos jugadores cobran mas del salario promedio.           |\n");
-    printf("| 4 - Informar la confederacion con mayor cantidad de anios de contratos total.                              |\n");
+    printf("| 4 - Informar la confederacion con mayor cantidad de anios de contratos total.                             |\n");
     printf("| 5 - Informar porcentaje de jugadores por cada confederacion.                                              |\n");
     printf("| 6 - Informar cual es la region con mas jugadores y el listado de los mismos.                              |\n");
     printf("| 7 - Salir                                                                                                 |\n");
     printf("=============================================================================================================\n");
-    utn_getNumero(&opcion, "| Ingrese opcion: ", "\n| ERROR", 1, 7, 10);
+
+	printf("| Ingrese una opcion:  ");
+	fflush(stdin);
+	scanf("%d", &opcion);
+
+	while( opcion < 1 || opcion > 7 )
+	{
+		fflush(stdin);
+		printf("| Ingrese una opcion:  ");
+		scanf("%d", &opcion);
+	}
     return opcion;
 }
 
@@ -518,6 +521,33 @@ int ordenar_ConfederacionYNombre ( eJugador jugador[], int len, eConfederacion c
 				if( strcmp(descConfederacion1, descConfederacion2) > 0 ||
 				  ( strcmp(descConfederacion1, descConfederacion2) == 0 &&
 				    strcmp(jugador[i].nombre, jugador[j].nombre) > 0) )
+				{
+					auxJugador = jugador[i];
+					jugador[i] = jugador[j];
+					jugador[j] = auxJugador;
+				}
+			}
+		}
+
+		listar_Jugador(jugador, len, confederacion, lenConfederacion);
+		retorno = 1;
+	}
+	return retorno;
+}
+
+int listarPorID ( eJugador jugador[], int len, eConfederacion confederacion[] , int lenConfederacion)
+{
+	int retorno = 0;
+
+	eJugador auxJugador;
+
+	if( jugador != NULL &&  confederacion != NULL && len > 0)
+	{
+		for( int i = 0; i < len -1; i++)
+		{
+			for(int j= i + 1; j < len; j++)
+			{
+				if ( jugador[i].id > jugador[j].id )
 				{
 					auxJugador = jugador[i];
 					jugador[i] = jugador[j];
@@ -572,20 +602,20 @@ int listadoDeTodosLasConfederacion ( eJugador jugador[], int len, eConfederacion
         printf("|                                           *** LISTADO DE CONFEDERACIONES ***                                       |\n");
         printf("======================================================================================================================\n\n");
 
-        printf("| lista de CONMEBOL\n");
-        mostrarConfederacionEspecifica(jugador, len, confederacion, 100);
-
         printf("| lista de UEFA\n");
         mostrarConfederacionEspecifica(jugador, len, confederacion, 101);
 
-        printf("| lista de AFC\n");
-        mostrarConfederacionEspecifica(jugador, len, confederacion, 102);
+        printf("| lista de CONMEBOL\n");
+        mostrarConfederacionEspecifica(jugador, len, confederacion, 100);
 
         printf("| lista de CAF\n");
         mostrarConfederacionEspecifica(jugador, len, confederacion, 103);
 
         printf("| lista de CONCACAF\n");
         mostrarConfederacionEspecifica(jugador, len, confederacion, 104);
+
+        printf("| lista de AFC\n");
+        mostrarConfederacionEspecifica(jugador, len, confederacion, 102);
 
         printf("| lista de OFC\n");
         mostrarConfederacionEspecifica(jugador, len, confederacion, 105);
@@ -600,7 +630,7 @@ int calculosDeJugadores(eJugador jugador[], int len)
 {
 	int retorno = 0;
 	float promedio;
-	int total;
+	float total;
 	int contador;
 
 	if ( jugador != NULL && len > 0 )
@@ -612,7 +642,7 @@ int calculosDeJugadores(eJugador jugador[], int len)
 		printf("\n============================================================");
 		printf("\n|     TOTAL    |   PROMEDIO   | COBRAN MAS QUE EL PROMEDIO |");
 		printf("\n============================================================");
-		printf("\n|  %-10d  |  %-10.2f  |             %-d              |",total,promedio,contador );
+		printf("\n|  %-10.2f  |  %-10.2f  |             %-d              |",total,promedio,contador );
 		printf("\n============================================================\n");
 
 		retorno = 1;
@@ -645,7 +675,7 @@ int promedioSalarios_Jugador(eJugador jugador[], int len, float* pPromedio )
 	return retorno;
 }
 
-int totalSalarios_Jugador(eJugador jugador[], int len, int* pTotal)
+int totalSalarios_Jugador(eJugador jugador[], int len, float* pTotal)
 {
 	int retorno = 0;
 	int contador = 0;
@@ -767,18 +797,16 @@ int promedioJugadoresXConfederacion( eJugador jugador[], int len, eConfederacion
     if(jugador != NULL && confederacion != NULL && len > 0 && lenConfederacion > 0)
     {
         system("cls");
-        printf("\n\n===========================================\n");
-        printf("| CONFEDERACION | PORCENTAJE DE JUGADORES |\n");
-        printf("===========================================\n");
-
+        printf("\n\n==============================\n");
+        printf("| CONFEDERACION | PORCENTAJE |\n");
+        printf("==============================\n");
         for( int i = 0; i < lenConfederacion; i++)
         {
         	promedioJugadoresConfederacion(jugador, len, confederacion, lenConfederacion, confederacion[i].id, &promedio);
-            printf("|   %-10s  |           %-10.2f    |\n", confederacion[i].nombre, promedio);
+            printf("|   %-10s  |  %-2.2f %c   |\n", confederacion[i].nombre, promedio, 37);
 
         }
-
-        printf("===========================================\n");
+        printf("==============================\n");
 
         retorno = 1;
     }
@@ -789,24 +817,26 @@ int promedioJugadoresConfederacion( eJugador jugador[], int len, eConfederacion 
 {
     int retorno = 0;
     float promedio = 0;
-    int acumJugador = 0;
+    int auxJugadores= 0;
+    int contAux = 0;
 
     if(jugador != NULL && confederacion != NULL && pPromedio != NULL && len > 0 && lenConfederacion > 0 && validar_confederacion(confederacion, len, idConfederacion))
     {
         for( int i = 0; i < len; i++ )
         {
-            if( jugador[i].isEmpty == 1 && jugador[i].idConfederacion == idConfederacion)
+            if( jugador[i].isEmpty == 1 )
             {
-            	acumJugador += 1;
+            	auxJugadores ++;
+            	if (jugador[i].idConfederacion == idConfederacion)
+            	{
+            		contAux ++;
+            	}
             }
         }
 
-        if(acumJugador != 0)
-        {
-        	promedio = ((float) acumJugador / len) * 100;
-        }
+        promedio = ((float) contAux / auxJugadores) * 100;
 
-        *pPromedio = promedio;
+        *pPromedio = promedio ;
         retorno = 1;
     }
     return retorno;
@@ -885,14 +915,23 @@ int listadoDeMayorRegion ( eJugador jugador[], int len, eConfederacion confedera
 int hardcodear_Jugador(eJugador jugador[], int len, int cantidad, int* pId)
 {
     int retorno = 0;
-    eJugador impostores[] =
-    {
-    	{0, "Franco Armani", "Arquero", 1, 100 ,3000000, 4, 1},
-    	{0, "Jonatan Maidana", "Defensor",4, 100,175000, 1, 1},
-    	{0, "Javier Pinola", "Defensor", 22, 100,175000, 1, 1},
-    	{0, "Nicolas de la Cruz", "Mediocampista", 11, 100,1300000, 1, 1},
-    	{0, "Juan Fernando Quintero", "Mediocampista", 10, 100,5000000, 1, 1}
-    };
+    eJugador impostores[15]={
+          {0,"Emiliano Martinez","ARQUERO",1,100,100000,4,1},
+          {0,"Juan Musso","ARQUERO",12,100,80000,2,1},
+          {0,"Leo Messi","DELANTERO",10,100,80000,4,1},
+          {0,"Almirez Ali","DELANTERO",9,100,55000,1,1},
+          {0,"Harry Maguire","DEFENSOR",2,101,70000,4,1},
+          {0,"Eric Dier","DEFENSOR",3,101,60000,2,1},
+          {0,"Harry Kane","DELANTERO",10,101,3000,2,1},
+          {0,"Alfred Gomis","ARQUERO",1,101,9000,1,1},
+          {0,"Abdelkarim Hassan","MEDIOCAMPISTA",8,101,48000,1,1},
+          {0,"Guillermo Ochoa","ARQUERO",1,104,90000,4,1},
+          {0,"Tecatito","DELANTERO",11,104,100000,3,1},
+          {0,"Luis Romo","MEDIOCAMPISTA",7,104,100000,2,1},
+          {0,"Bamba Dieng ","DELANTERO",9,103,100000,2,1},
+          {0,"Demba Seck","DELANTERO",11,103,6000,2,1},
+          {0,"Tarek Salman","DEFENSOR",6,102,78000,5,1}
+      };
 
     if(jugador != NULL && len > 0 && pId != NULL && cantidad > 0 && cantidad <= len)
     {

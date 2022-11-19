@@ -13,7 +13,7 @@ int utn_getFloat( float* pResultado, char * mensaje, char * mensajeError, float 
 int getFloat(float* pResultado);
 int isFloat(char* cadena);
 
-int validar_Nombre(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
+int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 int getNombre(char* pResultado,int longitud);
 int isNombre(char* cadena,int longitud);
 
@@ -21,4 +21,3 @@ int inicialesAMayuscula ( char* cadena );
 void validarSiONo (char* pResultado);
 
 #endif /* UTN_H_ */
-

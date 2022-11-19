@@ -36,8 +36,7 @@ void menuMain()
     };
 
     inicializar_Jugador(jugadores, LEN_JUGADORES);
-
-//    hardcodear_Jugador(jugadores, LEN_JUGADORES, 8, &proximoID);
+    hardcodear_Jugador(jugadores, LEN_JUGADORES, 15, &proximoID);
 
 	do
 	{
@@ -78,8 +77,7 @@ void menuMain()
 				{
 					baja_Jugador(jugadores, LEN_JUGADORES, confederaion, LEN_CONFEDERACION);
 				}
-
-				if ( flag != 1 )
+				else
 				{
 					printf("\n| ( ! ) Primero Ingrese un Jugador |\n");
 				}
@@ -90,8 +88,7 @@ void menuMain()
 				{
 					modificar_Jugador(jugadores, LEN_JUGADORES, confederaion, LEN_CONFEDERACION);
 				}
-
-				if ( flag != 1 )
+				else
 				{
 					printf("\n| ( ! ) Primero Ingrese un Jugador |\n");
 				}
@@ -102,8 +99,7 @@ void menuMain()
 				{
 					informesDe_Jugador(jugadores, LEN_JUGADORES, confederaion, LEN_CONFEDERACION);
 				}
-
-				if ( flag != 1 )
+				else
 				{
 					printf("\n| ( ! ) Primero Ingrese un Jugador |\n");
 				}

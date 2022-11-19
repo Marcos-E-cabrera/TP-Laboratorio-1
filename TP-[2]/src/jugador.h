@@ -35,6 +35,7 @@ int buscar_Jugador_Libre(eJugador jugador[], int len, int* pIndex);
 
 /* mostrar Jugador */
 int mostrar_Jugador(eJugador jugador, eConfederacion confederacion[], int len);
+
 int listar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion);
 
 /* abm de jugador */
@@ -111,6 +112,7 @@ int ordenar_ConfederacionYNombre ( eJugador jugador[], int len, eConfederacion c
 /// @param confederacion Estructura
 /// @return 1 bien, 0 error
 int listadoDeTodosLasConfederacion ( eJugador jugador[], int len, eConfederacion confederacion[] );
+int listarPorID ( eJugador jugador[], int len, eConfederacion confederacion[] , int lenConfederacion);
 
 /// @brief lista una confederacion especifica seleccionada
 ///
@@ -128,7 +130,7 @@ int mostrarConfederacionEspecifica( eJugador jugador[], int len, eConfederacion 
 /// @return 1 bien, 0 error
 int calculosDeJugadores(eJugador jugador[], int len);
 int promedioSalarios_Jugador(eJugador jugador[], int len, float* pPromedio );
-int totalSalarios_Jugador(eJugador jugador[], int len, int* pTotal);
+int totalSalarios_Jugador(eJugador jugador[], int len, float* pTotal);
 int salariosMayorPromedio ( eJugador jugador[], int len, int* pContador );
 
 /// @brief busca la coneferacion que contenga mayor cantidad de contrato
@@ -158,7 +160,6 @@ int promedioJugadoresConfederacion( eJugador jugador[], int len, eConfederacion 
 /// @param lenConfederacion tamanio del array de confederacion
 /// @return 1 bien, 0 error
 int regionConMasJugadores(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion);
-
 
 int hardcodear_Jugador(eJugador jugador[], int len, int cantidad, int* pId);
 
