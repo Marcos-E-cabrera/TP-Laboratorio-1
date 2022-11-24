@@ -11,12 +11,9 @@ int controller_listarJugadores(LinkedList* pArrayListJugador);//
 int controller_ordenarJugadoresYSelecciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion); //
 
 int controller_guardarJugadoresModoTexto(char* path , LinkedList* pArrayListJugador); //
-int controller_guardarJugadoresModoBinario(char* path , LinkedList* pArrayListJugador); //
-
 
 // SELECCION
 int controller_cargarSeleccionesDesdeTexto(char* path , LinkedList* pArrayListSeleccion); //
-int controller_editarSeleccion(LinkedList* pArrayListSeleccion); // checkear
 
 int controller_listarSelecciones(LinkedList* pArrayListSeleccion ); //
 
@@ -33,11 +30,15 @@ int controller_MunuConvocar(); //
 // LISTAR
 int controller_listado(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion); //
 int controller_listarConvocados( LinkedList* pArrayListJugador); //
+// funcion para listar
 
 // CONVOCAR
 int controller_Convocar ( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);//
+int controller_guardarJugadoresModoBinario(FILE* pFile , char* confederacion , LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion);
+int controller_filterConfederaciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion, int* flagCarga1, int* flagCarga2, int* flagCarga3, int* flagCarga4, int* flagCarga5);
 
-int controller_filterConfederaciones(LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion); //
+// ORDENAR
+int controller_sort( LinkedList* pArrayListJugador, LinkedList* pArrayListSeleccion , int (*pFunc)(void* ,void*),char list);
 
 // ID
 /// @brief busca el id DE un Jugador

@@ -1,5 +1,3 @@
-#include "LinkedList.h"
-
 #ifndef jug_H_INCLUDED
 #define jug_H_INCLUDED
 
@@ -49,10 +47,7 @@ int jug_OrdenarNacionalidad(void*a , void*b);
 int jug_OrdenarEdad(void*a , void*b);
 int jug_OrdenarNombre(void*a , void*b);
 
-// funcion para salvar
-void func_listarJugador(LinkedList* pArrayListJugador);
-void func_listarSeleccion(LinkedList* pArrayListSeleccion);
-void func_listarConvcados(LinkedList* pArrayListJugador);
+
 
 
 #endif // jug_H_INCLUDED

@@ -7,72 +7,19 @@
 #include "Controller.h"
 #include "Jugador.h"
 
-/*	2. MENÚ:
-	1. CARGA DE ARCHIVOS: Se deben leer los archivos .csv de jugadores y selecciones
-
-	2. ALTA DE JUGADOR: Se debe permitir ingresar un jugador calculando automáticamente
-		el número de Id, el id de la selección debe quedar en 0. El resto de los campos se le pedirá al usuario.
-
-        Nota: el id del jugador debe ser autoincremental, único, autónomo y debe persistir, es
-	  	decir, que su valor no debe reiniciarse cada vez que se reinicie la ejecución del
-		programa, no debe depender de la posición de un array/lista ni calcularse en base a
-		buscar el mayor id que tenga un jugador dentro del array/lista. El primer id disponible
-		para la carga manual es el 371.
-
-	3. MODIFICACIÓN DE JUGADOR: Se deberá mostrar la lista completa de jugadores con
-		todos sus datos y se podrá elegir uno, permitiendo modificar solamente: nombre, edad, posición, nacionalidad.
-		Este proceso debe contar con menú propio permitiendo elegir qué campo se desea modificar.
-
-	4. BAJA DE JUGADOR: Se deberá mostrar la lista completa de jugadores con todos sus datos, se podrá
-		elegir uno y se eliminará el jugador del sistema.
-
-		Nota: si el jugador a dar de baja estaba convocado a una selección, en dicha selección
-		se debe disminuir en 1 el contador de convocados.
-
-	5. LISTADOS:
-		A) TODOS LOS JUGADORES.
-		B) TODAS LAS SELECCIONES.
-		C) JUGADORES CONVOCADOS (únicamente).
-
-		Este proceso debe contar con menú propio permitiendo elegir qué listado se desea ver.
-
-	6. CONVOCAR JUGADORES:
-		A) CONVOCAR: siempre y cuando el jugador no esté convocado en otra selección y la
-			selección a donde será convocado no haya llegado a la cantidad máxima de
-			convocados, se deberá asociar al jugador el id de la selección y en dicha selección
-			se deberá aumentar el contador de convocados en 1. Al momento de tener que
-			elegir qué dato ingresar se deberá mostrar un listado con las opciones disponibles.
-
-		B) QUITAR DE LA SELECCIÓN: Se deberá mostrar el listado de jugadores convocados,
-			se podrá elegir uno, se pondrá el id de selección en 0 dejando al jugador disponible
-			para una nueva convocatoria y se deberá disminuir en 1 el contador de convocados
-			de dicha selección.
-
-	7. ORDENAR Y LISTAR:
-		A) JUGADORES POR NACIONALIDAD.
-		B) SELECCIONES POR CONFEDERACIÓN.
-		C) JUGADORES POR EDAD.
-		D) JUGADORES POR NOMBRE.
-
-		Este proceso debe contar con menú propio permitiendo elegir por cuál criterio se desea ordenar.
-
-	8. GENERAR ARCHIVO BINARIO: Generar y guardar en binario una nueva lista que
-		contenga los jugadores convocados de una confederación ingresada por el usuario.
-
-	9. CARGAR ARCHIVO BINARIO: Se deberá leer e imprimir los datos del archivo generado en el punto 8.
-
-	10. GUARDAR ARCHIVOS .CSV: Se deberá guardar en sus respectivos archivos todos los
-		cambios realizados en jugadores y selecciones.
-
-	11. SALIR: Termina la ejecución del programa previa confirmación del usuario, si se
-		realizaron cambios en los archivos y estos no fueron guardados debería informarse antes de permitir la salida.
- */
 int main()
 {
 	setbuf(stdout,NULL);
 
 	int option;
-	int flag = 0;
+	int flagDeCambios = 0;
+	int flagcargado1 = 0;
+	int flagcargado2 = 0;
+	int flagcargado3 = 0;
+	int flagcargado4 = 0;
+	int flagcargado5 = 0;
+	int flagCargaCSV = 0;
+	int flagCargaBin = 0;
 	char letra;
 	char validacion;
 
@@ -114,12 +61,25 @@ int main()
     	switch(option)
     	{
     		case 1:
-            	controller_cargarJugadoresDesdeTexto("jugadores.csv",listaJugadores);
-            	controller_cargarSeleccionesDesdeTexto("selecciones.csv",listaSelecciones);
-            	flag = 1;
+    			if ( flagCargaCSV == 0 )
+    			{
+					if ( controller_cargarJugadoresDesdeTexto("jugadores.csv",listaJugadores) == 1 )
+					{
+						flagCargaCSV = 1;
+					}
+
+					if ( controller_cargarSeleccionesDesdeTexto("selecciones.csv",listaSelecciones) == 1 )
+					{
+						flagCargaBin = 1;
+					}
+    			}
+    			else
+    			{
+    				printf("| ( ! ) ERROR, ARCHIVO CSV Y BIN YA CARGADOS\n");
+    			}
             	break;
     		case 2:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 )
     			{
 					controller_agregarJugador(listaJugadores);
     			}
@@ -129,7 +89,7 @@ int main()
     			}
             	break;
     		case 3:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 )
     			{
     				controller_editarJugador(listaJugadores);
 				}
@@ -139,7 +99,7 @@ int main()
 				}
     			break;
     		case 4:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
     				controller_removerJugador(listaJugadores, listaSelecciones);
     			}
@@ -149,7 +109,7 @@ int main()
     			}
     			break;
     		case 5:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
 					controller_listado(listaJugadores, listaSelecciones);
     			}
@@ -159,7 +119,7 @@ int main()
     			}
             	break;
     		case 6:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
     				controller_Convocar(listaJugadores, listaSelecciones);
     			}
@@ -169,7 +129,7 @@ int main()
     			}
             	break;
     		case 7:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
         			controller_ordenarJugadoresYSelecciones(listaJugadores, listaSelecciones);
     			}
@@ -179,9 +139,9 @@ int main()
     			}
     			break;
     		case 8:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
-					controller_filterConfederaciones(listaJugadores, listaSelecciones);
+					controller_filterConfederaciones(listaJugadores, listaSelecciones, &flagcargado1,&flagcargado2,&flagcargado3,&flagcargado4,&flagcargado5);
     			}
     			else
     			{
@@ -189,7 +149,7 @@ int main()
     			}
 				break;
     		case 9:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 )
     			{
 					controller_cargarJugadoresDesdeBinario("Convocados_Confederacion.bin", listaJugadores);
     			}
@@ -199,10 +159,11 @@ int main()
     			}
 				break;
        		case 10:
-    			if ( flag == 1 )
+    			if ( flagCargaCSV == 1 && flagCargaBin == 1 )
     			{
 					controller_guardarJugadoresModoTexto("jugadores.csv", listaJugadores);
 					controller_guardarSeleccionesModoTexto("selecciones.csv", listaSelecciones);
+					flagDeCambios = 1;
     			}
     			else
     			{
@@ -210,32 +171,33 @@ int main()
     			}
        			break;
        		case 11:
-    			if ( flag == 1 )
+    			if ( flagDeCambios == 1 )
     			{
     				printf("| DESEAS DE CERRAR LA APP (s/n) : ");
-					fflush(stdin);
-					scanf("%c",&validacion);
-					validacion = tolower(validacion);
+    				fflush(stdin);
+    				scanf("%c",&validacion);
+    				validacion = tolower(validacion);
 
-					while( validacion != 's' && validacion != 'n')
-					{
-						printf("| ( ! ) ERROR, SEGURO DESEAS CERRAR LA APP (s/n) : ");
-						fflush(stdin);
-						scanf("%c",&validacion);
-						validacion = tolower(validacion);
-					}
+    				while( validacion != 's' && validacion != 'n')
+    				{
+    					printf("| ( ! ) ERROR, SEGURO DESEAS CERRAR LA APP (s/n) : ");
+    					fflush(stdin);
+    					scanf("%c",&validacion);
+    					validacion = tolower(validacion);
+    				}
 
-					if ( validacion == 's' )
-					{
-						ll_deleteLinkedList(listaJugadores);
-						ll_deleteLinkedList(listaSelecciones);
-						letra = 's';
-					}
+    				if ( validacion == 's' )
+    				{
+    					ll_deleteLinkedList(listaJugadores);
+    					ll_deleteLinkedList(listaSelecciones);
+    					letra = 's';
+    				}
     			}
     			else
     			{
-    				printf("| ( ! ) ERROR, PRIMERO HACER LA CARGAR DE LOS ARCHIVOS\n");
+    				printf("| ( ! ) ERROR, PRIMERO HACER UPDATE DEL ARCHIVO Y VOLVER A INTENTAR\n");
     			}
+
     			break;
     	}
     	system("pause");

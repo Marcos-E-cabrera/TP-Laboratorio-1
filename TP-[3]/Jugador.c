@@ -7,22 +7,6 @@
 #include "seleccion.h"
 #include "controller.h"
 
-
-void func_listarJugador(LinkedList* pArrayListJugador)
-{
-	controller_listarJugadores(pArrayListJugador);
-}
-
-void func_listarSeleccion(LinkedList* pArrayListSeleccion )
-{
-	controller_listarSelecciones(pArrayListSeleccion);
-}
-
-void func_listarConvcados( LinkedList* pArrayListJugador)
-{
-	controller_listarConvocados(pArrayListJugador);
-}
-
 int jug_ImprimirDatos( Jugador* auxJugador )
 {
 	int retorno = 0;
