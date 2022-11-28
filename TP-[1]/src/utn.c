@@ -4,7 +4,52 @@
 #include <ctype.h>
 #include "utn.h"
 
+
+
+
+void utn_getValidacionSioNO(char* pResultado,char* mensaje, char* mensajeError)
+{
+	char validacion;
+
+	printf("%s",mensaje);
+	fflush(stdin);
+	scanf("%c",&validacion);
+	validacion = tolower(validacion);
+
+	while( validacion != 's' && validacion != 'n')
+	{
+ 		printf("%s",mensajeError);
+		fflush(stdin);
+		scanf("%c",&validacion);
+		validacion = tolower(validacion);
+	}
+
+	*pResultado = validacion;
+ }
+
+
+
+
+
+
 // > Entero
+void utn_ValidarMenu (int min, int max, int* opcion)
+{
+	int aux;
+
+	printf("| Ingrese una opcion:  ");
+	fflush(stdin);
+	scanf("%d", &aux);
+
+	while( aux < min || aux > max )
+	{
+		fflush(stdin);
+		printf("| Ingrese una opcion:  ");
+		scanf("%d", &aux);
+	}
+	*opcion = aux;
+}
+
 
 /**
 * \brief Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena

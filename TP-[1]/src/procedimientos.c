@@ -8,6 +8,10 @@
 #include "ABM.h"
 #include "procedimientos.h"
 
+#define LEN_ARQUEROS 2
+#define LEN_DEFENSAS 8
+#define LEN_MEDIOCAMPISTAS 8
+#define LEN_DELANTEROS 4
 
 int menu_Mantenimiento ()
 {
@@ -45,7 +49,7 @@ int ingresoDeCostoDeManenimiento ( float* pCosto )
 	if ( pCosto != NULL )
 	{
 		fflush(stdin);
-		if ( utn_getFloat( &auxContador, "| Ingrese Costo : ", "| Error ", 1000.00, 100000000.00, 50 ) )
+		if ( utn_getFloat( &auxContador, "| Ingrese Costo : ", "| Error ", 1.00, 100000000.00, 50 ) )
 		{
 			*pCosto += auxContador;
 			retorno = 1;
@@ -97,7 +101,7 @@ int cargaDePosiciones(int* cont1, int* cont2, int* cont3, int* cont4)
 		switch(auxPosicion)
 		{
 			case 1:
-				if ( *cont1 < 2)
+				if ( *cont1 < LEN_ARQUEROS)
 				{
 					auxCont1++;
 					*cont1 += auxCont1;
@@ -110,7 +114,7 @@ int cargaDePosiciones(int* cont1, int* cont2, int* cont3, int* cont4)
 				}
 				break;
 			case 2:
-				if ( *cont2 < 8)
+				if ( *cont2 < LEN_DEFENSAS)
 				{
 					auxCont2++;
 					*cont2 += auxCont2;
@@ -123,7 +127,7 @@ int cargaDePosiciones(int* cont1, int* cont2, int* cont3, int* cont4)
 				}
 				break;
 			case 3:
-				if ( *cont3 < 8)
+				if ( *cont3 < LEN_MEDIOCAMPISTAS)
 				{
 					auxCont3++;
 					*cont3 += auxCont3;
@@ -136,7 +140,7 @@ int cargaDePosiciones(int* cont1, int* cont2, int* cont3, int* cont4)
 				}
 				break;
 			case 4:
-				if ( *cont4 < 4)
+				if ( *cont4 < LEN_DELANTEROS)
 				{
 					auxCont4++;
 					*cont4 += auxCont4;
