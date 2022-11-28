@@ -224,7 +224,7 @@ void menuMain()
 						promedioUefa > promedioConmebol &&
 						promedioUefa > promedioOfc)
 					{
-						aumento = costoDeMantenimiento * 0.35; // descuento
+						aumento = costoDeMantenimiento * 0.35; // aumento de 35  %
 						costoDeMantenimientoFinal = costoDeMantenimiento + aumento;
 						flagUefaEsMayor = 1;
 					}
