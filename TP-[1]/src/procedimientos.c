@@ -5,7 +5,7 @@
 /* validaciones */
 #include "utn.h"
 
-#include "ABM.h"
+#include "menuPrincipal.h"
 #include "procedimientos.h"
 
 #define LEN_ARQUEROS 2
@@ -17,25 +17,16 @@ int menu_Mantenimiento ()
 {
 	int opcion;
 
-	printf("\n ------------------------------------------------\n");
+	printf("\n==================================================\n");
 	printf("| *** Ingreso de los costos de Mantenimiento *** |\n");
-	printf("|------------------------------------------------|\n");
+	printf("|================================================|\n");
 	printf("|  ( 1 ) Costo de Hospedaje.                     |\n");
 	printf("|  ( 2 ) Costo de Comida.                        |\n");
 	printf("|  ( 3 ) Costo de  Trasporte.                    |\n");
 	printf("|  ( 4 ) Salir.                                  |\n");
-	printf(" ------------------------------------------------|\n\n");
-	printf("| Ingrese una opcion:  ");
+	printf("==================================================\n\n");
 
-	fflush(stdin);
-	scanf("%d", &opcion);
-
-	while( opcion < 1 || opcion > 4 )
-	{
-		fflush(stdin);
-		printf("| Ingrese una opcion:  ");
-		scanf("%d", &opcion);
-	}
+	utn_ValidarMenu(1, 4, &opcion);
 
 	return opcion;
 }

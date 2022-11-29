@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "ABM.h"
+#include "menuPrincipal.h"
 #include "procedimientos.h"
 #include "utn.h"
 
@@ -12,7 +12,7 @@ void menuMain()
 {
 	setbuf(stdout,NULL);
 	int option;
-	char letra;
+
 	char salir;
 	int update;
 
@@ -108,7 +108,7 @@ void menuMain()
 	do
 	{
 		system("cls");
-		printf("\n ================================================\n");
+		printf("\n==================================================\n");
 		printf("|             *** Carga de Jugadores  ***        |\n");
 		printf("|================================================|\n");
 		printf("| 1 - Ingreso de los costos de Mantenimiento.    |\n");
@@ -123,19 +123,9 @@ void menuMain()
 		printf("| 3 - Realizar todos los calculos.               |\n");
 		printf("| 4 - Informar todos los resultados.             |\n");
 		printf("| 5 - Salir.                                     |\n");
-		printf(" ================================================\n");
+		printf("==================================================\n");
 
-		printf("| Ingrese una opcion: ");
-		fflush(stdin);
-		scanf("%d", &option);
-		scanf("%c", &letra);
-
-		while ( (isalpha(letra)) || (option < 1 || option >5)){
-			printf("| Error, Reingresa una opcion: ");
-			fflush(stdin);
-			scanf("%d", &option);
-			scanf("%c", &letra);
-		}
+		utn_ValidarMenu(1, 5, &option);
 
 		system("cls");
 		switch(option)
@@ -275,13 +265,23 @@ void menuMain()
 				}
 
 				break;
-			}
+			case 5:
+				utn_getValidacionSioNO(&salir,"| DESEAS DE CERRAR LA APP (s/n) : ", "| ( ! ) ERROR, SEGURO DESEAS CERRAR LA APP (s/n) : ");
 
+				if ( salir == 's' )
+				{
+					printf("| SALISTE DEL MENU!!!\n");
+				}
+				else
+				{
+					printf("| VOLVISTE AL MENU!!!\n");
+				}
+
+				break;
+		}
 			system("pause");
 
-		}while(option  != 5);
-
-		printf("| Saliste del Menu!!!");
+	}while( salir != 's' );
 }
 
 
