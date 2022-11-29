@@ -30,8 +30,6 @@ void utn_getValidacionSioNO(char* pResultado,char* mensaje, char* mensajeError)
 
 
 
-
-
 // > Entero
 void utn_ValidarMenu (int min, int max, int* opcion)
 {
@@ -44,7 +42,7 @@ void utn_ValidarMenu (int min, int max, int* opcion)
 	while( aux < min || aux > max )
 	{
 		fflush(stdin);
-		printf("| Ingrese una opcion:  ");
+		printf("| Error, Reingrese una opcion:  ");
 		scanf("%d", &aux);
 	}
 	*opcion = aux;

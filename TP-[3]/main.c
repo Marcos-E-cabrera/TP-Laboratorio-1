@@ -3,9 +3,9 @@
 #include <ctype.h>
 
 #include "LinkedList.h"
-
 #include "Controller.h"
 #include "Jugador.h"
+#include "utn.h"
 
 int main()
 {
@@ -45,17 +45,7 @@ int main()
  		printf("| 11 | SALIR                                                   |\n");
     	printf("================================================================\n");
 
-   		printf("| Ingrese una opcion: ");
-   		fflush(stdin);
-   		scanf("%d", &option);
-   		scanf("%c", &letra);
-
-    	while ( (isalpha(letra)) || (option < 1 || option >11)){
-    		printf("| Error, Reingresa una opcion: ");
-   			fflush(stdin);
-   			scanf("%d", &option);
-   			scanf("%c", &letra);
-   		}
+    	utn_ValidarMenu(1, 11, &option);
 
    		system("cls");
     	switch(option)
