@@ -79,3 +79,4 @@ int validar_confederacion(eConfederacion confederacion[], int len, int id)
 }
 
 
+

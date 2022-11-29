@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "utn.h"
-#include "ABM.h"
-#include "jugador.h"
+#include "menuPrincipal.h"
 #include "confederacion.h"
+#include "jugador.h"
+#include "utn.h"
 
 #define  LEN_JUGADORES 300  /* jugadores a ingresar */
 #define  LEN_CONFEDERACION 6 /* confederacion a ingresar */
@@ -14,7 +14,6 @@ void menuMain()
 {
 	setbuf(stdout,NULL);
 	int option;
-	char letra;
 	char confirmacion = 'n';
 
 	/* id del jugador */
@@ -35,13 +34,16 @@ void menuMain()
         {105, "OFC", "OCEANIA", 1966}
     };
 
+    /* INICIALIZACION DE JUGADORES */
     inicializar_Jugador(jugadores, LEN_JUGADORES);
+
+    /* HARDCODEO DE LOS JUDADORES  */
     hardcodear_Jugador(jugadores, LEN_JUGADORES, 15, &proximoID);
 
-	do
+    do
 	{
 		system("cls");
-		printf("\n ===============================\n");
+		printf("\n=================================\n");
 		printf("|    *** AMB DE LA FIFA ***     |\n");
 		printf("|===============================|\n");
 		printf("| 1 - ALTA DE JUGADOR           |\n");
@@ -49,19 +51,9 @@ void menuMain()
 		printf("| 3 - MODIFICACION DE JUGADOR   |\n");
 		printf("| 4 - INFORMES                  |\n");
 		printf("| 5 - SALIR                     |\n");
-		printf(" ===============================\n");
+		printf("=================================\n");
 
-		printf("| Ingrese una opcion: ");
-		fflush(stdin);
-		scanf("%d", &option);
-		scanf("%c", &letra);
-
-		while ( (isalpha(letra)) || (option < 1 || option >5)){
-			printf("| Error, Reingresa una opcion: ");
-			fflush(stdin);
-			scanf("%d", &option);
-			scanf("%c", &letra);
-		}
+		utn_ValidarMenu(1, 5, &option);
 
 		system("cls");
 		switch(option)

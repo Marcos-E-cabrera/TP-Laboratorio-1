@@ -1,5 +1,3 @@
-#include "confederacion.h"
-
 #ifndef JUGADOR_H_
 #define JUGADOR_H_
 
@@ -37,6 +35,7 @@ int buscar_Jugador_Libre(eJugador jugador[], int len, int* pIndex);
 int mostrar_Jugador(eJugador jugador, eConfederacion confederacion[], int len);
 
 int listar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion);
+int listadoDeMayorRegion ( eJugador jugador[], int len, eConfederacion confederacion[], int regionID );
 
 /* abm de jugador */
 /// @brief Alta de jugador con esto pediremos los datos necesarios para ingresar un nuevo jugador
@@ -89,6 +88,7 @@ int menu_Jugador();
 /// @param lenConfederacion tamanio del array de confederacion
 /// @return 1 bien, 0 error
 int informesDe_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion);
+void MostrarJugadorEspeficifico(eConfederacion listaConfederaciones[],int sizeConfederaciones,eJugador listaJugadores[],int sizeJugadores,char nombreRegion[]);
 
 /// @brief menu de opciones de listado
 ///

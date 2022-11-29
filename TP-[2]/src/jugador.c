@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+#include "confederacion.h"
 #include "jugador.h"
 #include "utn.h"
 
@@ -113,6 +115,7 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
             else
             {
             	/* Incio de la carga del jugador: nombre, posicion, camiseta, confederacion, salario y aniocontrato */
+            	fflush(stdin);
             	utn_getNombre(newJugador.nombre, 50, "|> Ingrese el Nombre: ", "| Error ", 50);
             	inicialesAMayuscula(newJugador.nombre);
 
@@ -157,7 +160,7 @@ int alta_Jugador(eJugador jugador[], int lenJugador, eConfederacion confederacio
                 }
 
         		fflush(stdin);
-                utn_getFloat(&newJugador.salario, "|> Ingrese el Salario: ", "| Error ", 0.00, 100000.00, 50);
+                utn_getFloat(&newJugador.salario, "|> Ingrese el Salario: ", "| Error ", 1.00, 100000.00, 50);
         		fflush(stdin);
                 utn_getNumero(&auxContrato, "|> Ingrese Anios de Contrato: ", "| Error ", 1, 20, 50);
                 newJugador.aniosContrato = (short) auxContrato;
@@ -210,11 +213,7 @@ int baja_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], in
             	mostrar_Jugador(jugador[indice], confederacion, lenConfederacion);
                 printf("======================================================================================================================\n");
 
-            	printf("\n|> Confirma baja ( s / n)?: ");
-                fflush(stdin);
-                scanf("%c", &confirmacion);
-
-                confirmacion = tolower(confirmacion);
+                utn_getValidacionSioNO(&confirmacion, "|> Confirma baja ( s / n ):  ", "| error,  Confirma baja ( s / n ):  ");
 
                 if( confirmacion != 's' )
                 {
@@ -432,7 +431,6 @@ int listar_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], 
 int informesDe_Jugador(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion)
 {
     int retorno = 0;
-
     char salir = 'n';
 
     if(jugador != NULL && len > 0)
@@ -444,30 +442,91 @@ int informesDe_Jugador(eJugador jugador[], int len, eConfederacion confederacion
     		{
     			case 1:
     				ordenar_ConfederacionYNombre(jugador, len, confederacion, lenConfederacion);
+    	    		system("pause");
     				break;
     			case 2:
     	    		listadoDeTodosLasConfederacion(jugador, len, confederacion);
+    	    		system("pause");
     				break;
     			case 3:
     				calculosDeJugadores(jugador, len);
+    	    		system("pause");
     				break;
     			case 4:
     				confederacionMayorContrato(jugador, len, confederacion, lenConfederacion);
+    	    		system("pause");
     				break;
     			case 5:
     				promedioJugadoresXConfederacion(jugador, len, confederacion, lenConfederacion);
+    	    		system("pause");
     				break;
     			case 6:
     				regionConMasJugadores(jugador, len, confederacion, lenConfederacion);
-    				break;
+    	    		system("pause");
+					break;
     			case 7:
     				salir = 's';
     				break;
     		}
-    		system("pause");
     	}while(salir != 's');
 
         retorno = 1;
+    }
+    return retorno;
+}
+
+int regionConMasJugadores(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion)
+{
+	int retorno = 0;
+	int flag = 0;
+	int mayorRegion;
+	int ContadorRegion[lenConfederacion];
+	int flagConederacion;
+
+	if(jugador != NULL && confederacion != NULL && len > 0 && lenConfederacion > 0)
+    {
+        system("cls");
+		printf("\n\n======================================================================================================================\n");
+        printf("|                                         ***  REGIONES CON MAS JUGADORES  ***                                       |\n");
+		printf("======================================================================================================================\n");
+
+        for( int i = 0; i < lenConfederacion; i++ )
+        {
+        	ContadorRegion[i] = 0;
+        }
+
+        for( int i = 0; i < lenConfederacion; i++ )
+        {
+            for( int j = 0; j < len; j++ )
+            {
+            	if( jugador[j].isEmpty == 1 && jugador[j].idConfederacion == confederacion[i].id)
+            	{
+            		ContadorRegion[i]++;
+            	}
+            }
+        }
+
+        for( int i = 0; i < lenConfederacion; i++)
+        {
+            if( flag == 0  || ContadorRegion[i] > mayorRegion )
+            {
+            	mayorRegion = ContadorRegion[i];
+                flag = 1;
+            }
+        }
+
+        for( int i = 0; i < lenConfederacion; i++)
+        {
+        	if(ContadorRegion[i] == mayorRegion)
+        	{
+        		printf("| La Region con mas jugadores es ( %s ) y pertenece a %-12s                                           |\n",confederacion[i].region,confederacion[i].nombre);
+        		flagConederacion = confederacion[i].id;
+            }
+        }
+
+        mostrarConfederacionEspecifica(jugador, len, confederacion, flagConederacion);
+
+      retorno = 1;
     }
     return retorno;
 }
@@ -769,7 +828,7 @@ int confederacionMayorContrato(eJugador jugador[], int len, eConfederacion confe
             }
         }
 
-        printf("| La confederacion con mas contraro, tiene %d anios y es: ", mayorCotrato);
+        printf("| La confederacion con mas contraro, tiene %d a%cos y es: ", mayorCotrato, 164);
 
         /* como recorro el lenConfederacion cargados con sus respectivos contratos comparo con el mayorContrato
          * si son iguales cargo el nombre de dicha confederacion
@@ -838,62 +897,6 @@ int promedioJugadoresConfederacion( eJugador jugador[], int len, eConfederacion 
 
         *pPromedio = promedio ;
         retorno = 1;
-    }
-    return retorno;
-}
-
-int regionConMasJugadores(eJugador jugador[], int len, eConfederacion confederacion[], int lenConfederacion)
-{
-	int retorno = 0;
-	int flag = 0;
-	int mayorRegion;
-	int ContadorRegion[lenConfederacion];
-	int flagConederacion;
-
-	if(jugador != NULL && confederacion != NULL && len > 0 && lenConfederacion > 0)
-    {
-        system("cls");
-		printf("\n\n======================================================================================================================\n");
-        printf("|                                         ***  REGIONES CON MAS JUGADORES  ***                                       |\n");
-		printf("======================================================================================================================\n");
-
-        for( int i = 0; i < lenConfederacion; i++ )
-        {
-        	ContadorRegion[i] = 0;
-        }
-
-        for( int i = 0; i < lenConfederacion; i++ )
-        {
-            for( int j = 0; j < len; j++ )
-            {
-            	if( jugador[j].isEmpty == 1 && jugador[j].idConfederacion == confederacion[i].id)
-            	{
-            		ContadorRegion[i]++;
-            	}
-            }
-        }
-
-        for( int i = 0; i < lenConfederacion; i++)
-        {
-            if( flag == 0  || ContadorRegion[i] > mayorRegion )
-            {
-            	mayorRegion = ContadorRegion[i];
-                flag = 1;
-            }
-        }
-
-        for( int i = 0; i < lenConfederacion; i++)
-        {
-        	if(ContadorRegion[i] == mayorRegion)
-        	{
-        		printf("| La Region con mas jugadores es ( %s ) y pertenece a %-12s                                           |\n",confederacion[i].region,confederacion[i].nombre);
-        		flagConederacion = confederacion[i].id;
-            }
-        }
-
-        mostrarConfederacionEspecifica(jugador, len, confederacion, flagConederacion);
-
-      retorno = 1;
     }
     return retorno;
 }
